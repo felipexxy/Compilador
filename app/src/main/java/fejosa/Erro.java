@@ -12,13 +12,13 @@ public class Erro {
     }
 
     public enum TipoErro {
-        ERRO_LEXICO,
+        LEXICO,
     }
 
     @Override
     public String toString() {
         switch (tipo) {
-            case ERRO_LEXICO: {
+            case LEXICO: {
                 return String.format("Erro Léxico: Carácter não reconhecido em: L%d:C%d\n", linha, coluna);
             }
             default:

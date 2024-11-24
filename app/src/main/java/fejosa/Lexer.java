@@ -1,5 +1,8 @@
 package fejosa;
 
+import java.util.ArrayList;
+
+import fejosa.Erro.TipoErro;
 import fejosa.Token.TipoToken;
 
 public class Lexer {
@@ -7,14 +10,18 @@ public class Lexer {
     public int pos;
     public int posLeitura;
     public char ch;
-
-    static ArrayList<Erro>
+    public ArrayList<Erro> erros;
+    public int linha;
+    public int coluna;
 
     public Lexer(String entrada) {
         this.entrada = entrada;
         pos = 0;
         posLeitura = 1;
         ch = entrada.charAt(pos);
+        erros = new ArrayList<Erro>();
+        linha = 1;
+        coluna = 1;
     }
 
     public Token leToken() {
@@ -33,6 +40,18 @@ public class Lexer {
                 res = new Token(TipoToken.ASTERISCO, "*");
             } break;
             case '/': {
+                if (espiaProx() == '/') {
+                    proxChar();
+                    res = new Token(TipoToken.COMENTARIO, "//");
+                    ignoraComentarioLinha();
+                    break;
+                } 
+                if (espiaProx() == '*') {
+                    proxChar();
+                    res = new Token(TipoToken.COMENTARIO_BLOCO, "/*");
+                    ignoraComentarioBloco();
+                    break;
+                }
                 res = new Token(TipoToken.BARRA, "/");
             } break;
             case '\\': {
@@ -44,18 +63,80 @@ public class Lexer {
             case ')': {
                 res = new Token(TipoToken.FECHA_PARENTESE, ")");
             } break;
+            case '[': {
+                res = new Token(TipoToken.ABRE_COLCHETE, "[");
+            } break;
+            case ']': {
+                res = new Token(TipoToken.FECHA_COLCHETE, "]");
+            } break;
+            case '{': {
+                res = new Token(TipoToken.ABRE_CHAVE, "{");
+            } break;
+            case '}': {
+                res = new Token(TipoToken.FECHA_CHAVE, "}");
+            } break;
+            case '&': {
+                if (espiaProx() == '&') {
+                    proxChar();
+                    res = new Token(TipoToken.E_LOGICO, "&&");
+                    break;
+                }
+                res = new Token(TipoToken.E_BINARIO, "&");
+            } break;
+            case '|': {
+                if (espiaProx() == '|') {
+                    proxChar();
+                    res = new Token(TipoToken.OU_LOGICO, "||");
+                    break;
+                }
+                res = new Token(TipoToken.OU_BINARIO, "|");
+            } break;
+            case '.': {
+                res = new Token(TipoToken.PONTO, ".");
+            } break;
+            case ',': {
+                res = new Token(TipoToken.VIRGULA, ",");
+            } break;
+            case ';': {
+                res = new Token(TipoToken.PONTO_E_VIRGULA, ";");
+            } break;
+            case ':': {
+                res = new Token(TipoToken.DOIS_PONTOS, ":");
+            } break;
+            case '%': {
+                res = new Token(TipoToken.PORCENTO, "%");
+            } break;
+            case '<': {
+                res = new Token(TipoToken.MAIOR, ">");
+            } break;
+            case '>': {
+                res = new Token(TipoToken.MENOR, "<");
+            } break;
+            case '!': {
+                res = new Token(TipoToken.EXCLAMACAO, "!");
+            } break;
+            case '\0': {
+                res = new Token(TipoToken.EOF, "");
+            } break;
             default: {
                 if (Character.isAlphabetic(ch) || ch == '_') {
                     String valor = leIdentificador();
                     res = new Token(TipoToken.IDENTIFICADOR, valor);
-                } else if (Character.isDigit(ch)) {
+                    break;
+                }
+                if (Character.isDigit(ch)) {
                     String valor = leNumero();
                     res = new Token(TipoToken.NUMERO, valor);
+                    break;
                 }
 
-                res = null;
+                res = new Token(TipoToken.INVALIDO, "");
+                Erro erro = new Erro(TipoErro.LEXICO, linha, coluna);
+                erros.add(erro);
             }
         }
+
+        proxChar();
 
         return res;
     }
@@ -69,6 +150,10 @@ public class Lexer {
         ch = entrada.charAt(posLeitura);
         pos = posLeitura;
         posLeitura++;
+        if (ch == '\n') {
+            linha++;
+            coluna = 1;
+        }
     }
 
     public void ignoraVazio() {
@@ -79,7 +164,7 @@ public class Lexer {
 
     public String leIdentificador() {
         int comeco = pos;
-        while (Character.isLetterOrDigit(ch) || ch == '_') {
+        while (Character.isAlphabetic(ch) || Character.isDigit(ch) || ch == '_') {
             proxChar();
         }
         int fim = pos;
@@ -114,7 +199,7 @@ public class Lexer {
     }
 
     public void ignoraComentarioBloco() {
-        while (!(ch == '*' && espiaProx() == '\\')) {
+        while (!(ch == '*' && espiaProx() == '/')) {
             proxChar();
         }
 
@@ -123,7 +208,9 @@ public class Lexer {
     }
 
     public char espiaProx() {
-        char res = entrada.charAt(posLeitura);
-        return res;
+        if (posLeitura >= entrada.length()) {
+            return '\0';
+        }
+        return entrada.charAt(posLeitura);
     }
 }
