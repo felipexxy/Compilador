@@ -34,10 +34,23 @@ public class Token {
         EXCLAMACAO,
         NUMERO,
         EOF,
+        INT,
+        FLOAT,
+        CHAR,
+        STRING,
+        IF,
+        ELSE,
+        ELSE_IF,
+        WHILE
     }
 
     public Token(TipoToken tipo, String valor) {
         this.tipo = tipo;
         this.valor = valor;
     }
+
+    public void imprimiToken() {
+        System.out.println("Valor: " + valor + " ... Token: " + tipo);
+    }
+
 }

@@ -32,20 +32,23 @@ public class Lexer {
         switch (ch) {
             case '+': {
                 res = new Token(TipoToken.MAIS, "+");
-            } break;
+            }
+                break;
             case '-': {
                 res = new Token(TipoToken.MENOS, "-");
-            } break;
+            }
+                break;
             case '*': {
                 res = new Token(TipoToken.ASTERISCO, "*");
-            } break;
+            }
+                break;
             case '/': {
                 if (espiaProx() == '/') {
                     proxChar();
                     res = new Token(TipoToken.COMENTARIO, "//");
                     ignoraComentarioLinha();
                     break;
-                } 
+                }
                 if (espiaProx() == '*') {
                     proxChar();
                     res = new Token(TipoToken.COMENTARIO_BLOCO, "/*");
@@ -53,28 +56,36 @@ public class Lexer {
                     break;
                 }
                 res = new Token(TipoToken.BARRA, "/");
-            } break;
+            }
+                break;
             case '\\': {
                 res = new Token(TipoToken.BARRA_INVERTIDA, "\\");
-            } break;
+            }
+                break;
             case '(': {
                 res = new Token(TipoToken.ABRE_PARENTESE, "(");
-            } break;
+            }
+                break;
             case ')': {
                 res = new Token(TipoToken.FECHA_PARENTESE, ")");
-            } break;
+            }
+                break;
             case '[': {
                 res = new Token(TipoToken.ABRE_COLCHETE, "[");
-            } break;
+            }
+                break;
             case ']': {
                 res = new Token(TipoToken.FECHA_COLCHETE, "]");
-            } break;
+            }
+                break;
             case '{': {
                 res = new Token(TipoToken.ABRE_CHAVE, "{");
-            } break;
+            }
+                break;
             case '}': {
                 res = new Token(TipoToken.FECHA_CHAVE, "}");
-            } break;
+            }
+                break;
             case '&': {
                 if (espiaProx() == '&') {
                     proxChar();
@@ -82,7 +93,8 @@ public class Lexer {
                     break;
                 }
                 res = new Token(TipoToken.E_BINARIO, "&");
-            } break;
+            }
+                break;
             case '|': {
                 if (espiaProx() == '|') {
                     proxChar();
@@ -90,38 +102,48 @@ public class Lexer {
                     break;
                 }
                 res = new Token(TipoToken.OU_BINARIO, "|");
-            } break;
+            }
+                break;
             case '.': {
                 res = new Token(TipoToken.PONTO, ".");
-            } break;
+            }
+                break;
             case ',': {
                 res = new Token(TipoToken.VIRGULA, ",");
-            } break;
+            }
+                break;
             case ';': {
                 res = new Token(TipoToken.PONTO_E_VIRGULA, ";");
-            } break;
+            }
+                break;
             case ':': {
                 res = new Token(TipoToken.DOIS_PONTOS, ":");
-            } break;
+            }
+                break;
             case '%': {
                 res = new Token(TipoToken.PORCENTO, "%");
-            } break;
+            }
+                break;
             case '<': {
                 res = new Token(TipoToken.MAIOR, ">");
-            } break;
+            }
+                break;
             case '>': {
                 res = new Token(TipoToken.MENOR, "<");
-            } break;
+            }
+                break;
             case '!': {
                 res = new Token(TipoToken.EXCLAMACAO, "!");
-            } break;
+            }
+                break;
             case '\0': {
                 res = new Token(TipoToken.EOF, "");
-            } break;
+            }
+                break;
             default: {
                 if (Character.isAlphabetic(ch) || ch == '_') {
                     String valor = leIdentificador();
-                    res = new Token(TipoToken.IDENTIFICADOR, valor);
+                    res = verificaReservada(valor);
                     break;
                 }
                 if (Character.isDigit(ch)) {
@@ -164,12 +186,35 @@ public class Lexer {
 
     public String leIdentificador() {
         int comeco = pos;
-        while (Character.isAlphabetic(ch) || Character.isDigit(ch) || ch == '_') {
+        while (Character.isAlphabetic(ch) || Character.isDigit(ch) || ch == '_')
             proxChar();
-        }
-        int fim = pos;
 
-        String res = entrada.substring(comeco, fim);
+        int fim = pos;
+        String res = entrada.substring(comeco, fim + 1);
+        return res;
+    }
+
+    public Token verificaReservada(String texto) {
+
+        Token res = new Token(TipoToken.IDENTIFICADOR, texto);
+
+        if (texto.equals("int"))
+            res = new Token(TipoToken.INT, texto);
+        else if (texto.equals("float"))
+            res = new Token(TipoToken.FLOAT, texto);
+        else if (texto.equals("char"))
+            res = new Token(TipoToken.CHAR, texto);
+        else if (texto.equals("string"))
+            res = new Token(TipoToken.STRING, texto);
+        else if (texto.equals("if"))
+            res = new Token(TipoToken.IF, texto);
+        else if (texto.equals("else"))
+            res = new Token(TipoToken.ELSE, texto);
+        else if (texto.equals("else_if"))
+            res = new Token(TipoToken.ELSE_IF, texto);
+        else if (texto.equals("while"))
+            res = new Token(TipoToken.WHILE, texto);
+
         return res;
     }
 
