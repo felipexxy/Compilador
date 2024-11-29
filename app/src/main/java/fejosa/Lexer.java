@@ -168,7 +168,6 @@ public class Lexer {
                 res = new Token(TipoToken.CHAR, caracter);
             } break;
             case '"': {
-                proxChar();
                 String str = leString();
                 res = new Token(TipoToken.STRING, str);
             } break;
@@ -305,9 +304,10 @@ public class Lexer {
 
     public String leString() {
         int comeco = pos;
-        while (ch != '"') {
+        while (espiaProx() != '"') {
             proxChar();
         }
+        proxChar();
         int fim = posLeitura;
 
         String res = entrada.substring(comeco, fim);
