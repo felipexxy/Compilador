@@ -1,6 +1,8 @@
 package fejosa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import fejosa.Erro.TipoErro;
 import fejosa.Token.TipoToken;
@@ -13,6 +15,13 @@ public class Lexer {
     public ArrayList<Erro> erros;
     public int linha;
     public int coluna;
+
+    static List<String> tipos = Arrays.asList(
+        "i8", "i16", "i32", "i64",
+        "u8", "u16", "u32", "u64",
+        "f32", "f64",
+        "string"
+    );
 
     public Lexer(String entrada) {
         this.entrada = entrada;
@@ -35,6 +44,11 @@ public class Lexer {
             }
                 break;
             case '-': {
+                if (espiaProx() == '>') {
+                    proxChar();
+                    res = new Token(TipoToken.SETA, "->");
+                    break;
+                }
                 res = new Token(TipoToken.MENOS, "-");
             }
                 break;
@@ -105,6 +119,11 @@ public class Lexer {
             }
                 break;
             case '.': {
+                if (espiaProx() == '.') {
+                    proxChar();
+                    res = new Token(TipoToken.PONTO_PONTO, "..");
+                    break;
+                }
                 res = new Token(TipoToken.PONTO, ".");
             }
                 break;
@@ -132,10 +151,27 @@ public class Lexer {
                 res = new Token(TipoToken.MENOR, "<");
             }
                 break;
+            case '=': {
+                if (espiaProx() == '=') {
+                    proxChar();
+                    res = new Token(TipoToken.IGUAL, "==");
+                    break;
+                }
+                res = new Token(TipoToken.ATRIBUICAO, "=");
+            } break;
             case '!': {
                 res = new Token(TipoToken.EXCLAMACAO, "!");
             }
                 break;
+            case '\'': {
+                String caracter = leCaracter();
+                res = new Token(TipoToken.CHAR, caracter);
+            } break;
+            case '"': {
+                proxChar();
+                String str = leString();
+                res = new Token(TipoToken.STRING, str);
+            } break;
             case '\0': {
                 res = new Token(TipoToken.EOF, "");
             }
@@ -186,50 +222,93 @@ public class Lexer {
 
     public String leIdentificador() {
         int comeco = pos;
-        while (Character.isAlphabetic(ch) || Character.isDigit(ch) || ch == '_')
+        while (Character.isAlphabetic(espiaProx()) || Character.isDigit(espiaProx()) || espiaProx() == '_')
             proxChar();
 
-        int fim = pos;
-        String res = entrada.substring(comeco, fim + 1);
+        int fim = posLeitura;
+        String res = entrada.substring(comeco, fim);
         return res;
     }
 
     public Token verificaReservada(String texto) {
-
-        Token res = new Token(TipoToken.IDENTIFICADOR, texto);
-
-        if (texto.equals("int"))
-            res = new Token(TipoToken.INT, texto);
-        else if (texto.equals("float"))
-            res = new Token(TipoToken.FLOAT, texto);
-        else if (texto.equals("char"))
-            res = new Token(TipoToken.CHAR, texto);
-        else if (texto.equals("string"))
-            res = new Token(TipoToken.STRING, texto);
-        else if (texto.equals("if"))
-            res = new Token(TipoToken.IF, texto);
-        else if (texto.equals("else"))
-            res = new Token(TipoToken.ELSE, texto);
-        else if (texto.equals("else_if"))
-            res = new Token(TipoToken.ELSE_IF, texto);
-        else if (texto.equals("while"))
-            res = new Token(TipoToken.WHILE, texto);
+        Token res;
+        if (tipos.contains(texto)) {
+            res = new Token(TipoToken.TIPO, texto);
+        } else {
+            switch (texto) {
+                case "true": {
+                    res = Token.tokenTrue;
+                } break;
+                case "false": {
+                    res = Token.tokenFalse;
+                } break;
+                case "fn": {
+                    res = new Token(TipoToken.FUNCAO, texto);
+                } break;
+                case "for": {
+                    res = new Token(TipoToken.FOR, texto);
+                } break;
+                case "if": {
+                    res = new Token(TipoToken.IF, texto);
+                } break;
+                case "else": {
+                    res = new Token(TipoToken.ELSE, texto);
+                } break;
+                case "main": {
+                    res = new Token(TipoToken.MAIN, texto);
+                } break;
+                case "return": {
+                    res = new Token(TipoToken.RETURN, texto);
+                } break;
+                case "in": {
+                    res = new Token(TipoToken.IN, texto);
+                } break;
+                case "void": {
+                    res = new Token(TipoToken.VOID, texto);
+                } break;
+                default: {
+                    res = new Token(TipoToken.IDENTIFICADOR, texto);
+                }
+            }
+        }
 
         return res;
     }
 
     public String leNumero() {
         int comeco = pos;
-        while (Character.isDigit(ch)) {
+        while (Character.isDigit(espiaProx())) {
             proxChar();
         }
-        if (ch == '.') {
+        if (espiaProx() == '.' && espiaProx2() != '.') {
+            proxChar();
+            while (Character.isDigit(espiaProx())) {
+                proxChar();
+            }
+        }
+        int fim = posLeitura;
+
+        String res = entrada.substring(comeco, fim);
+        return res;
+    }
+    
+    public String leCaracter() {
+        int comeco = pos;
+        proxChar();
+        proxChar();
+        proxChar();
+        int fim = comeco + 3;
+
+        String res = entrada.substring(comeco, fim);
+        return res;
+    }
+
+    public String leString() {
+        int comeco = pos;
+        while (ch != '"') {
             proxChar();
         }
-        while (Character.isDigit(ch)) {
-            proxChar();
-        }
-        int fim = pos;
+        int fim = posLeitura;
 
         String res = entrada.substring(comeco, fim);
         return res;
@@ -239,8 +318,6 @@ public class Lexer {
         while (ch != '\n') {
             proxChar();
         }
-
-        proxChar();
     }
 
     public void ignoraComentarioBloco() {
@@ -249,7 +326,6 @@ public class Lexer {
         }
 
         proxChar();
-        proxChar();
     }
 
     public char espiaProx() {
@@ -257,5 +333,12 @@ public class Lexer {
             return '\0';
         }
         return entrada.charAt(posLeitura);
+    }
+
+    public char espiaProx2() {
+        if (posLeitura + 1 >= entrada.length()) {
+            return '\0';
+        }
+        return entrada.charAt(posLeitura + 1);
     }
 }

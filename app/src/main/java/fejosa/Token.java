@@ -4,6 +4,9 @@ public class Token {
     TipoToken tipo;
     String valor;
 
+    static Token tokenTrue = new Token(TipoToken.BOOLEANO, "true");
+    static Token tokenFalse = new Token(TipoToken.BOOLEANO, "false");
+
     public enum TipoToken {
         INVALIDO,
         MAIS,
@@ -32,16 +35,26 @@ public class Token {
         MAIOR,
         MENOR,
         EXCLAMACAO,
+        ATRIBUICAO,
+        IGUAL,
         NUMERO,
-        EOF,
-        INT,
-        FLOAT,
         CHAR,
         STRING,
+        BOOLEANO,
+        TIPO,
         IF,
         ELSE,
         ELSE_IF,
-        WHILE
+        WHILE,
+        SETA,
+        PONTO_PONTO,
+        FUNCAO,
+        FOR,
+        MAIN,
+        RETURN,
+        IN,
+        VOID,
+        EOF,
     }
 
     public Token(TipoToken tipo, String valor) {
