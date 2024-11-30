@@ -242,28 +242,31 @@ public class Lexer {
                     res = Token.tokenFalse;
                 } break;
                 case "fn": {
-                    res = new Token(TipoToken.FUNCAO, texto);
+                    res = Token.tokenFuncao;
                 } break;
                 case "for": {
-                    res = new Token(TipoToken.FOR, texto);
+                    res = Token.tokenFor;
                 } break;
                 case "if": {
-                    res = new Token(TipoToken.IF, texto);
+                    res = Token.tokenIf;
                 } break;
                 case "else": {
-                    res = new Token(TipoToken.ELSE, texto);
+                    res = Token.tokenElse;
                 } break;
                 case "main": {
-                    res = new Token(TipoToken.MAIN, texto);
+                    res = Token.tokenMain;
                 } break;
                 case "return": {
-                    res = new Token(TipoToken.RETURN, texto);
+                    res = Token.tokenReturn;
                 } break;
                 case "in": {
-                    res = new Token(TipoToken.IN, texto);
+                    res = Token.tokenIn;
                 } break;
                 case "void": {
-                    res = new Token(TipoToken.VOID, texto);
+                    res = Token.tokenVoid;
+                } break;
+                case "struct": {
+                    res = Token.tokenStruct;
                 } break;
                 default: {
                     res = new Token(TipoToken.IDENTIFICADOR, texto);
@@ -279,7 +282,7 @@ public class Lexer {
         while (Character.isDigit(espiaProx())) {
             proxChar();
         }
-        if (espiaProx() == '.' && espiaProx2() != '.') {
+        if (espiaProx() == '.' && espiaProx(2) != '.') {
             proxChar();
             while (Character.isDigit(espiaProx())) {
                 proxChar();
@@ -335,10 +338,11 @@ public class Lexer {
         return entrada.charAt(posLeitura);
     }
 
-    public char espiaProx2() {
-        if (posLeitura + 1 >= entrada.length()) {
+    public char espiaProx(int casas) {
+        casas -= 1;
+        if (posLeitura + casas >= entrada.length()) {
             return '\0';
         }
-        return entrada.charAt(posLeitura + 1);
+        return entrada.charAt(posLeitura + casas);
     }
 }
