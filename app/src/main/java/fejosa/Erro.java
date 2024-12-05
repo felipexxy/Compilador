@@ -19,7 +19,7 @@ public class Erro {
     public String toString() {
         switch (tipo) {
             case LEXICO: {
-                return String.format("Erro Léxico: Carácter não reconhecido em: L%d:C%d\n", linha, coluna);
+                return String.format("Erro Léxico: Carácter não reconhecido em: L%d:C%d", linha, coluna);
             }
             default:
                 return "";

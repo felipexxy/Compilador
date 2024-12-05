@@ -3,4 +3,5 @@
 
 # Ignore Gradle build output directory
 build
-app/bin/main/fejosa
+app/bin/main/
+app/bin/test/

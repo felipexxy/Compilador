@@ -20,12 +20,15 @@ public class Jofel {
         + "struct Bunda {\n"
         + "    i32 a,\n"
         + "    u32 b,\n"
-        + "}";
+        + "}\n"
+        + "              ^";
         Lexer lexer = new Lexer(teste);
         Token token = lexer.leToken();
         while (token.tipo != TipoToken.EOF) {
             token.imprimiToken();
             token = lexer.leToken();
         }
+
+        lexer.erros.forEach((erro) -> erro.print());
     }
 }

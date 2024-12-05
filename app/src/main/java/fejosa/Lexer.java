@@ -207,6 +207,7 @@ public class Lexer {
         ch = entrada.charAt(posLeitura);
         pos = posLeitura;
         posLeitura++;
+        coluna++;
         if (ch == '\n') {
             linha++;
             coluna = 1;
