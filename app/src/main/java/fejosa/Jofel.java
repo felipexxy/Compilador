@@ -12,26 +12,21 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Jofel {
     public static void main(String[] args) {
+
+        String teste = "i32 coiso = 1234;\n"
+                + "f32 coiso6 = 123.456;\n"
+                + "// blablablablabla\n"
+                + "string coiso2 = \"hello world\";\n"
+                + "u8 coiso3 = 'a';\n"
+                + "fn teste() -> void {\n"
+                + "    if (a == 10) {\n"
+                + "    } else if (b == 11) {\n"
+                + "    } else {\n"
+                + "    }\n"
+                + "for i in 0..10 {\n"
+                + "}\n";
+
         /*
-         * String teste = "i32 coiso = 1234;\n"
-         * + "f32 coiso6 = 123.456;\n"
-         * + "// blablablablabla\n"
-         * + "string coiso2 = \"hello world\";\n"
-         * + "u8 coiso3 = 'a';\n"
-         * + "fn main() -> void {\n"
-         * + "    if a == 10 {\n"
-         * + "    } else if b == 11 {\n"
-         * + "    } else {\n"
-         * + "    }\n"
-         * + "for i in 0..10 {\n"
-         * + "}\n"
-         * + "struct Bunda {\n"
-         * + "    i32 a,\n"
-         * + "    u32 b,\n"
-         * + "}\n"
-         * + "              ^";
-         * 
-         * 
          * Lexer lexer = new Lexer(teste);
          * Token token = lexer.leToken();
          * while (token.tipo != TipoToken.EOF) {
@@ -43,10 +38,10 @@ public class Jofel {
          */
 
         // Definindo a entrada
-        String input = "x+2;";
+        String input = "string x = \"hello world\";";
 
         // Criando o Lexer
-        GramaticaLexer lexer = new GramaticaLexer(CharStreams.fromString(input));
+        GramaticaLexer lexer = new GramaticaLexer(CharStreams.fromString(teste));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         // Força a criação do fluxo de tokens e imprimi tokens encontrados

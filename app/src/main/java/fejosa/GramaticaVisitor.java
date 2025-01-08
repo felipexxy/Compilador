@@ -47,6 +47,18 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStmt(GramaticaParser.IfStmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#elseIfStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseIfStmt(GramaticaParser.ElseIfStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#elseStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseStmt(GramaticaParser.ElseStmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#whileStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -64,6 +76,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnStmt(GramaticaParser.ReturnStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#assignStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignStmt(GramaticaParser.AssignStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#expr}.
 	 * @param ctx the parse tree
