@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Jofel {
     public static void main(String[] args) {
 
-        String caminhoArquivo = "app/src/main/java/fejosa/testes/test_cond.txt";
+        String caminhoArquivo = "app/src/main/java/fejosa/testes/test_geral1.txt";
         StringBuilder conteudoArquivo = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
@@ -38,10 +38,13 @@ public class Jofel {
         tokens.fill();
         List<Token> allTokens = tokens.getTokens();
 
-        System.out.println("--- TOKENS ENCONTRADOS ---");
+        System.out.println("--------------------------------------------------");
+        System.out.println("                 ANÁLISE LÉXICA");
+        System.out.println("--------------------------------------------------");
+        System.out.println("+ TOKENS ENCONTRADOS:");
         for (Token token : allTokens) {
             System.out.println(
-                    "Lexema: " + token.getText() + " Token: " +
+                    "- (Lexema): " + token.getText() + " (Token): " +
                             lexer.getVocabulary().getSymbolicName(token.getType()));
         }
 
@@ -49,19 +52,30 @@ public class Jofel {
         GramaticaParser parser = new GramaticaParser(tokens);
         ParseTree tree = parser.prog();
 
-        // Imprimindo a árvore de parsing
-        System.out.println("\n--- ÁRVORE SINTÁTICA ---");
-        System.out.println(tree.toStringTree(parser));
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("                 ANÁLISE SINTÁTICA");
+        System.out.println("--------------------------------------------------");
+        System.out.println("+ ÁRVORE SINTÁTICA:");
+        System.out.println("- " + tree.toStringTree(parser));
 
         // Visualização gráfica da árvore
         JFrame frame = new JFrame("Árvore Sintática");
         JPanel panel = new JPanel();
         TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()), tree);
-        viewer.setScale(1.5); // Ajuste da escala da árvore
+        viewer.setScale(0.9); // Ajuste da escala da árvore
         panel.add(viewer);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(800, 800);
         frame.setVisible(true);
+
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("                 ANÁLISE SEMÂNTICA");
+        System.out.println("--------------------------------------------------");
+        System.out.println("+ VÁRIAVEIS DECLARADAS:");
+        SemanticAnalyzer analyzer = new SemanticAnalyzer();
+        analyzer.visit(tree);
+        analyzer.printErrors();
+
     }
 }

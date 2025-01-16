@@ -76,7 +76,7 @@ stmt:
 	| scanStmt
 	| forStmt
 	| returnStmt
-	| assignStmt ; // Adicionado assignStmt
+	| assignStmt ;
 
 mainFunc:
 	FUNCAO MAIN ABRE_PARENTESE FECHA_PARENTESE SETA VOID ABRE_CHAVE stmt* FECHA_CHAVE;
