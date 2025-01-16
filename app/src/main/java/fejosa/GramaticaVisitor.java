@@ -23,6 +23,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmt(GramaticaParser.StmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#mainFunc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMainFunc(GramaticaParser.MainFuncContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#varDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -34,6 +40,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFuncDecl(GramaticaParser.FuncDeclContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#paramDecl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParamDecl(GramaticaParser.ParamDeclContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#exprStmt}.
 	 * @param ctx the parse tree
@@ -82,6 +94,18 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAssignStmt(GramaticaParser.AssignStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#printStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintStmt(GramaticaParser.PrintStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#scanStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScanStmt(GramaticaParser.ScanStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#expr}.
 	 * @param ctx the parse tree

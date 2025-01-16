@@ -1,0 +1,34 @@
+fn main() -> void{
+	if (x > 0) {
+		display("x é positivo");
+	}
+
+	if (x > 0) {
+		display("x é positivo");
+	} else {
+		display("x não é positivo");
+	}
+
+	if (x > 0) {
+		display("x é positivo");
+	} else if (x == 0) {
+		display("x é zero");
+	} else {
+		display("x é negativo");
+	}
+
+	if (x > 0) {
+		display("x é positivo");
+	} else if (x == 0) {
+		display("x é zero");
+	}
+
+	if (x > 0) {
+		if (y > 0) {
+			display("x e y são positivos");
+		}
+	} else {
+		display("x não é positivo");
+	}
+
+}

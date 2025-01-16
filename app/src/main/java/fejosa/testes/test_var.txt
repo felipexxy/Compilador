@@ -1,0 +1,16 @@
+fn main() -> void{
+	i32 numero = 10;
+	i64 grandeNumero = 10000000000;
+	f32 pequenoDecimal = 3.14;
+	f64 grandeDecimal = 2.718281828459;
+	string texto = "Olá, Mundo!";
+	u8 caractere = 'a';
+
+	i32 numeroSemInicializacao;
+	string textoSemInicializacao;
+	f64 decimalSemInicializacao;
+
+	i32 numeros[10];
+	string palavras[5];
+	f64 decimais[3];
+}

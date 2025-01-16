@@ -1,0 +1,18 @@
+fn main() -> void{
+	i32 coiso = 1234;
+	f32 coiso6 = 123.456;
+	// blablablablabla
+	string coiso2 = "hello world";
+	u8 coiso3 = 'a';
+	fn teste() -> void {
+		if (a == 10) {
+		x = x + y;
+   		} else if (b == 11) {
+   		} else {
+   		}
+		for i in 0..10 {
+		}
+	}
+	display("teste");
+	input("%d", teste);
+}

@@ -1,0 +1,19 @@
+fn main() -> void {
+    for i in 0..10 {
+        display(i);
+    }
+
+    for j in 1..5 {
+        i32 resultado = j * 2;
+        display(resultado);
+    }
+
+    for k in 0..3 {
+        if (k % 2 == 0) {
+            display(k, " é par");
+        } else {
+            display(k, " é ímpar");
+        }
+    }
+
+}

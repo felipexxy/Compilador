@@ -42,45 +42,98 @@ RETURN: 'return';
 IF: 'if';
 ELSE: 'else';
 STRUCT: 'struct';
-TIPO: 'i8'|'i16'|'i32'|'i64'|'u8'|'u16'|'u32'|'u64'|'f32'|'f64'|'string'|'void';
-IDENTIFICADOR: [a-zA-Z_][a-zA-Z_0-9]* ;
+TIPO:
+	'i8'
+	| 'i16'
+	| 'i32'
+	| 'i64'
+	| 'u8'
+	| 'u16'
+	| 'u32'
+	| 'u64'
+	| 'f32'
+	| 'f64'
+	| 'string';
 WHILE: 'while';
-WS: [ \t\r\n]+ -> skip;  // Ignorar espaços em branco
+DISPLAY: 'display';
+INPUT: 'input';
+VOID: 'void';
+IDENTIFICADOR: [a-zA-Z_][a-zA-Z_0-9]*;
+WS: [ \t\r\n]+ -> skip; // Ignorar espaços em branco
 
-ESC: '\\' . ;
+ESC: '\\' .;
 
 // Regras Sintáticas
-prog:   stmt+ EOF;  // Adiciona EOF ao final do programa
+prog: mainFunc stmt* EOF;
 
-stmt:   varDecl
-    |   funcDecl
-    |   exprStmt
-    |   ifStmt
-    |   whileStmt
-    |   forStmt
-    |   returnStmt
-    ;
+stmt:
+	varDecl
+	| funcDecl
+	| exprStmt
+	| ifStmt
+	| whileStmt
+	| printStmt
+	| scanStmt
+	| forStmt
+	| returnStmt
+	| assignStmt ; // Adicionado assignStmt
 
-varDecl: TIPO IDENTIFICADOR ('=' expr)? ';' 
-        | TIPO IDENTIFICADOR ABRE_COLCHETE NUMERO FECHA_COLCHETE PONTO_E_VIRGULA;
+mainFunc:
+	FUNCAO MAIN ABRE_PARENTESE FECHA_PARENTESE SETA VOID ABRE_CHAVE stmt* FECHA_CHAVE;
 
-funcDecl: FUNCAO IDENTIFICADOR ABRE_PARENTESE (IDENTIFICADOR (VIRGULA IDENTIFICADOR)*)? FECHA_PARENTESE SETA TIPO ABRE_CHAVE stmt* FECHA_CHAVE;
-exprStmt: expr PONTO_E_VIRGULA ;
-ifStmt: IF ABRE_PARENTESE expr FECHA_PARENTESE stmt (elseIfStmt)* (elseStmt)?;
-elseIfStmt: ELSE IF ABRE_PARENTESE expr FECHA_PARENTESE stmt; 
-elseStmt: ELSE stmt;
-whileStmt: WHILE ABRE_PARENTESE expr FECHA_PARENTESE stmt ;
-forStmt: FOR IDENTIFICADOR IN NUMERO PONTO_PONTO NUMERO ABRE_CHAVE stmt* FECHA_CHAVE;
-returnStmt: RETURN expr? PONTO_E_VIRGULA ;
-assignStmt: IDENTIFICADOR ATRIBUICAO expr PONTO_E_VIRGULA
-            | IDENTIFICADOR ABRE_COLCHETE expr FECHA_COLCHETE ATRIBUICAO expr PONTO_E_VIRGULA;
+varDecl:
+	TIPO IDENTIFICADOR ('=' expr)? PONTO_E_VIRGULA
+	| TIPO IDENTIFICADOR ABRE_COLCHETE NUMERO FECHA_COLCHETE PONTO_E_VIRGULA;
 
-expr:   expr (MAIS | MENOS) expr
-    |   expr (ASTERISCO | BARRA) expr
-    |   expr IGUAL expr 
-    |   NUMERO
-    |   STRING
-    |   CHAR
-    |   IDENTIFICADOR
-    | IDENTIFICADOR ABRE_COLCHETE expr FECHA_COLCHETE
-    ;
+funcDecl:
+	FUNCAO IDENTIFICADOR ABRE_PARENTESE (
+		paramDecl (VIRGULA paramDecl)*
+	)? FECHA_PARENTESE SETA (TIPO | VOID) ABRE_CHAVE stmt* FECHA_CHAVE;
+
+paramDecl: TIPO IDENTIFICADOR;
+
+exprStmt: expr PONTO_E_VIRGULA;
+
+ifStmt:
+	IF ABRE_PARENTESE expr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE (
+		elseIfStmt
+	)* (elseStmt)?;
+
+elseIfStmt:
+	ELSE IF ABRE_PARENTESE expr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE;
+
+elseStmt: ELSE ABRE_CHAVE stmt* FECHA_CHAVE;
+
+whileStmt:
+	WHILE ABRE_PARENTESE expr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE;
+
+forStmt:
+	FOR IDENTIFICADOR IN NUMERO PONTO_PONTO NUMERO ABRE_CHAVE stmt* FECHA_CHAVE;
+
+returnStmt: RETURN expr? PONTO_E_VIRGULA;
+
+assignStmt:
+	IDENTIFICADOR ATRIBUICAO expr PONTO_E_VIRGULA
+	| IDENTIFICADOR ABRE_COLCHETE expr FECHA_COLCHETE ATRIBUICAO expr PONTO_E_VIRGULA;
+
+printStmt:
+	DISPLAY ABRE_PARENTESE expr (VIRGULA expr)* FECHA_PARENTESE PONTO_E_VIRGULA;
+
+scanStmt:
+	INPUT ABRE_PARENTESE expr (VIRGULA expr)* FECHA_PARENTESE PONTO_E_VIRGULA;
+
+expr:
+	expr (MAIS | MENOS) expr
+	| expr (ASTERISCO | BARRA | PORCENTO) expr
+	| expr IGUAL expr
+	| expr (MAIOR | MENOR | MAIOR IGUAL | MENOR IGUAL) expr
+	| ABRE_PARENTESE expr FECHA_PARENTESE
+	| NUMERO
+	| STRING
+	| CHAR
+	| BOOLEANO
+	| IDENTIFICADOR
+	| IDENTIFICADOR ABRE_COLCHETE expr FECHA_COLCHETE
+	| DISPLAY ABRE_PARENTESE expr FECHA_PARENTESE
+	| IDENTIFICADOR ABRE_PARENTESE (expr (VIRGULA expr)*)? FECHA_PARENTESE
+	| assignStmt;

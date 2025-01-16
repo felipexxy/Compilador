@@ -1,0 +1,11 @@
+fn main() -> void{
+	x = 5;
+	y = x + 10;
+	resultado = (a + b) * c;
+	d = e / (f - g);
+	imprimirMensagem();
+	soma = calcularSoma(a, b);
+	boolMaior = x > y;
+	igual = (a == b);
+	saudacao = "Olá, " + nome + "!";
+}

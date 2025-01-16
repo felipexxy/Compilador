@@ -2,43 +2,31 @@ package fejosa;
 
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-//import fejosa.Token.TipoToken;
-
 public class Jofel {
     public static void main(String[] args) {
 
-        String teste = "i32 coiso = 1234;\n"
-                + "f32 coiso6 = 123.456;\n"
-                + "// blablablablabla\n"
-                + "string coiso2 = \"hello world\";\n"
-                + "u8 coiso3 = 'a';\n"
-                + "fn teste() -> void {\n"
-                + "    if (a == 10) {\n"
-                + "    } else if (b == 11) {\n"
-                + "    } else {\n"
-                + "    }\n"
-                + "for i in 0..10 {\n"
-                + "}\n";
+        String caminhoArquivo = "app/src/main/java/fejosa/testes/test_cond.txt";
+        StringBuilder conteudoArquivo = new StringBuilder();
 
-        /*
-         * Lexer lexer = new Lexer(teste);
-         * Token token = lexer.leToken();
-         * while (token.tipo != TipoToken.EOF) {
-         * token.imprimiToken();
-         * token = lexer.leToken();
-         * }
-         * 
-         * lexer.erros.forEach((erro) -> erro.print());
-         */
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                conteudoArquivo.append(linha).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        // Definindo a entrada
-        String input = "string x = \"hello world\";";
+        String teste = conteudoArquivo.toString();
 
         // Criando o Lexer
         GramaticaLexer lexer = new GramaticaLexer(CharStreams.fromString(teste));
