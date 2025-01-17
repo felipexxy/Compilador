@@ -3,19 +3,15 @@ package fejosa;
 public class Symbol {
 
     String name;
+    String token;
     String type;
+    String value;
+    String category;
 
-    public Symbol(String name, String type) {
+    public Symbol(String name, String token, String type) {
         this.name = name;
+        this.token = token;
         this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getType() {
-        return type;
     }
 
 }

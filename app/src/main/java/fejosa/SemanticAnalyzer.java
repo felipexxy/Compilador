@@ -1,75 +1,66 @@
 package fejosa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
 
-    SymbolTable symbolTable = new SymbolTable();
-    List<String> errors = new ArrayList<>();
+    private Map<String, String> tabelaSimbolos = new HashMap<>();
 
+    // verificar se as variaveis foram declaradas
     @Override
     public Void visitVarDecl(GramaticaParser.VarDeclContext ctx) {
-        String name = ctx.IDENTIFICADOR().getText();
-        String type = ctx.TIPO().getText();
-        symbolTable.define(name, type);
+        String tipo = ctx.TIPO().getText();
+        String nome = ctx.IDENTIFICADOR().getText();
+        String tipoEsperado = verificarTipoExpr(ctx.expr());
 
-        Symbol symbol = symbolTable.resolve(name);
-        if (symbol != null) {
-            System.out.println("- (Variável): " + symbol.name + " (tipo): " + symbol.type);
+        // Verifica se a variável já foi declarada
+        if (tabelaSimbolos.containsKey(nome)) {
+            System.out.println("! ERRO SEMÂNTICO (variável já declarada) - var -> " + "( " + nome + " )");
         } else {
-            errors.add("! Erro ao registrar a variável: " + name);
-        }
-        return null;
-    }
-
-    @Override
-    public Void visitAssignStmt(GramaticaParser.AssignStmtContext ctx) {
-        String varName = ctx.IDENTIFICADOR().getText();
-        Symbol symbol = symbolTable.resolve(varName);
-
-        if (symbol == null) {
-            errors.add("! Erro: Variável " + varName + " não definida.");
-        } else {
-            String varType = symbol.type;
-            List<GramaticaParser.ExprContext> exprContexts = ctx.expr(); // Obtém a lista de contextos de expressão
-            for (GramaticaParser.ExprContext exprCtx : exprContexts) {
-                if (exprCtx != null) {
-                    String exprType = getType(exprCtx);
-                    if (!varType.equals(exprType)) {
-                        errors.add("Erro: Tipo incompatível para a variável " + varName + ". Esperado: " + varType
-                                + ", Encontrado: " + exprType);
-                    }
-                } else {
-                    errors.add("Erro: Contexto de expressão nulo para a variável " + varName);
-                }
+            if (tipo.equals(tipoEsperado)) {
+                tabelaSimbolos.put(nome, tipo);
+            } else {
+                System.out.println("! ERRO SEMÂNTICO: (variável com tipos incompatívei) - var -> " + "( " + nome + " )"
+                        + " - tipo esperado: " + "( " + tipo + " )" + " - tipo encontrado:" + "( " + tipoEsperado
+                        + " )");
             }
         }
         return null;
     }
 
-    private String getType(GramaticaParser.ExprContext ctx) {
+    // Método para exibir a tabela de símbolos
+    public void exibirTabelaSimbolos() {
+        System.out.println("Tabela de Símbolos:");
+        System.out.println("====================");
+
+        if (tabelaSimbolos.isEmpty()) {
+            System.out.println("Nenhuma variável declarada.");
+        } else {
+            // Itera pela tabela de símbolos e exibe as variáveis e seus tipos
+            for (Map.Entry<String, String> entrada : tabelaSimbolos.entrySet()) {
+                System.out.println("Nome: " + entrada.getKey() + " | Tipo: " + entrada.getValue());
+            }
+        }
+
+        System.out.println("====================");
+    }
+
+    // Método auxiliar para verificar o tipo de uma expressão
+    private String verificarTipoExpr(GramaticaParser.ExprContext ctx) {
         if (ctx.NUMERO() != null) {
-            return "int";
+            if (ctx.NUMERO().getText().contains(".")) { // verifica se numero é float
+                return "f32";
+            } else {
+                return "i8";
+            }
         } else if (ctx.STRING() != null) {
             return "string";
+        } else if (ctx.CHAR() != null) {
+            return "u8";
         } else if (ctx.IDENTIFICADOR() != null) {
-            Symbol symbol = symbolTable.resolve(ctx.IDENTIFICADOR().getText());
-            if (symbol != null) {
-                return symbol.type;
-            }
+            return tabelaSimbolos.get(ctx.IDENTIFICADOR().getText());
         }
-        return "unknown";
-    }
-
-    public void printErrors() {
-        if (errors.isEmpty()) {
-            System.out.println("\n- Nenhum erro semântico encontrado.");
-        } else {
-            System.out.println("\n+ Erros semânticos encontrados:");
-            for (String error : errors) {
-                System.out.println(error);
-            }
-        }
+        return "desconhecido";
     }
 }

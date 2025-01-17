@@ -9,13 +9,12 @@ public class SymbolTable {
     Map<String, Symbol> symbols = new HashMap<>();
 
     // add novos simbolos a tabela
-    void define(String name, String type) {
-        symbols.put(name, new Symbol(name, type));
+    void define(String name, String token, String type) {
+        symbols.put(name, new Symbol(name, token, type));
     }
 
     Symbol resolve(String name) {
         return symbols.get(name);
     }
-
 
 }

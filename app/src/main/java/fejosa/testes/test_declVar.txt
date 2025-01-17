@@ -1,0 +1,20 @@
+fn main() -> void {
+    i8 x = 10;
+    f32 y = 20.5;
+	f32 y = 21.5;
+    string z = "Olá, mundo!";
+    u8 w = 'a';
+    if (a == 10) {
+        i8 b = 5;
+        f32 c = 6.7;
+    }
+    for i in 0..10 {
+        string d = "Dentro do loop";
+    }
+
+	string pal = 12;
+	i8 g = "teste";
+	f32 u = 12;
+	f = 10;
+}
+
