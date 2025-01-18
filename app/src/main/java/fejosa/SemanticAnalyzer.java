@@ -84,9 +84,11 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
     private String verificarTipo(GramaticaParser.ExprContext ctx) {
         if (ctx.NUMERO() != null) {
             if (ctx.NUMERO().getText().contains(".")) { // verifica se numero é float
-                return "f32";
+                // return "f32";
+                return "real"; // f32 ou f64
             } else {
-                return "i8";
+                // return "i8";
+                return "inteiro"; // 8 alternativas
             }
         } else if (ctx.STRING() != null) {
             return "string";
