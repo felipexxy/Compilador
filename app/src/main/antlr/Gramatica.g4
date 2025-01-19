@@ -24,8 +24,11 @@ PONTO_E_VIRGULA: ';';
 DOIS_PONTOS: ':';
 PORCENTO: '%';
 MAIOR: '>';
+MAIOR_IGUAL: '>=';
 MENOR: '<';
+MENOR_IGUAL: '<=';
 IGUAL: '==';
+DIFERENTE: '!=';
 ATRIBUICAO: '=';
 EXCLAMACAO: '!';
 NUMERO: [\-]?[0-9]+ ('.' [0-9]+)?;
@@ -123,10 +126,10 @@ scanStmt:
 	INPUT ABRE_PARENTESE expr (VIRGULA expr)* FECHA_PARENTESE PONTO_E_VIRGULA;
 
 expr:
-	expr (MAIS | MENOS) expr
-	| expr (ASTERISCO | BARRA | PORCENTO) expr
-	| expr IGUAL expr
-	| expr (MAIOR | MENOR | MAIOR IGUAL | MENOR IGUAL) expr
+	lhs=expr op=(MAIS | MENOS) rhs=expr
+	| lhs=expr op=(ASTERISCO | BARRA | PORCENTO) rhs=expr
+	| lhs=expr op=IGUAL rhs=expr
+	| lhs=expr op=(MAIOR | MENOR | MAIOR_IGUAL | MENOR_IGUAL) rhs=expr
 	| ABRE_PARENTESE expr FECHA_PARENTESE
 	| NUMERO
 	| STRING

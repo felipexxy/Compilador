@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Jofel {
     public static void main(String[] args) {
 
-        String caminhoArquivo = "/home/sampie/faculdade/Compilador/app/src/main/java/fejosa/testes/test_declVar.txt";
+        String caminhoArquivo = "/home/sampie/faculdade/Compilador/app/src/main/java/fejosa/testes/test_cond.txt";
         StringBuilder conteudoArquivo = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {

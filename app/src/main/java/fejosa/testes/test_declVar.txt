@@ -2,7 +2,7 @@ fn main() -> void {
     i8 x = 10;
     f32 y = 20.5;
     f32 y = 21.5;
-    f32 chienlo = 42134321;
+    f32 chinelo = 42134321;
     u32 bunda = 11.11;
     u32 coiso = -10;
     string z = "Olá, mundo!";
@@ -16,7 +16,7 @@ fn main() -> void {
         string d = "Dentro do loop";
     }
 
-    chienlo = "coiso";
+    chinelo = "coiso";
 
     string pal = 12;
     i8 g = "teste";

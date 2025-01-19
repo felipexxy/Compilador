@@ -1,5 +1,5 @@
-package fejosa;
 // Generated from app/src/main/antlr/Gramatica.g4 by ANTLR 4.13.2
+package fejosa;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -21,11 +21,11 @@ public class GramaticaParser extends Parser {
 		FECHA_PARENTESE=8, ABRE_COLCHETE=9, FECHA_COLCHETE=10, ABRE_CHAVE=11, 
 		FECHA_CHAVE=12, E_LOGICO=13, E_BINARIO=14, OU_LOGICO=15, OU_BINARIO=16, 
 		PONTO_PONTO=17, PONTO=18, VIRGULA=19, PONTO_E_VIRGULA=20, DOIS_PONTOS=21, 
-		PORCENTO=22, MAIOR=23, MENOR=24, IGUAL=25, ATRIBUICAO=26, EXCLAMACAO=27, 
-		NUMERO=28, COMENTARIO=29, COMENTARIO_BLOCO=30, STRING=31, CHAR=32, BOOLEANO=33, 
-		MAIN=34, FOR=35, IN=36, FUNCAO=37, RETURN=38, IF=39, ELSE=40, STRUCT=41, 
-		TIPO=42, WHILE=43, DISPLAY=44, INPUT=45, VOID=46, IDENTIFICADOR=47, WS=48, 
-		ESC=49;
+		PORCENTO=22, MAIOR=23, MAIOR_IGUAL=24, MENOR=25, MENOR_IGUAL=26, IGUAL=27, 
+		DIFERENTE=28, ATRIBUICAO=29, EXCLAMACAO=30, NUMERO=31, COMENTARIO=32, 
+		COMENTARIO_BLOCO=33, STRING=34, CHAR=35, BOOLEANO=36, MAIN=37, FOR=38, 
+		IN=39, FUNCAO=40, RETURN=41, IF=42, ELSE=43, STRUCT=44, TIPO=45, WHILE=46, 
+		DISPLAY=47, INPUT=48, VOID=49, IDENTIFICADOR=50, WS=51, ESC=52;
 	public static final int
 		RULE_prog = 0, RULE_stmt = 1, RULE_mainFunc = 2, RULE_varDecl = 3, RULE_funcDecl = 4, 
 		RULE_paramDecl = 5, RULE_exprStmt = 6, RULE_ifStmt = 7, RULE_elseIfStmt = 8, 
@@ -44,10 +44,10 @@ public class GramaticaParser extends Parser {
 		return new String[] {
 			null, "'+'", "'->'", "'-'", "'*'", "'/'", "'\\'", "'('", "')'", "'['", 
 			"']'", "'{'", "'}'", "'&&'", "'&'", "'||'", "'|'", "'..'", "'.'", "','", 
-			"';'", "':'", "'%'", "'>'", "'<'", "'=='", "'='", "'!'", null, null, 
-			null, null, null, null, "'main'", "'for'", "'in'", "'fn'", "'return'", 
-			"'if'", "'else'", "'struct'", null, "'while'", "'display'", "'input'", 
-			"'void'"
+			"';'", "':'", "'%'", "'>'", "'>='", "'<'", "'<='", "'=='", "'!='", "'='", 
+			"'!'", null, null, null, null, null, null, "'main'", "'for'", "'in'", 
+			"'fn'", "'return'", "'if'", "'else'", "'struct'", null, "'while'", "'display'", 
+			"'input'", "'void'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -57,10 +57,11 @@ public class GramaticaParser extends Parser {
 			"ABRE_PARENTESE", "FECHA_PARENTESE", "ABRE_COLCHETE", "FECHA_COLCHETE", 
 			"ABRE_CHAVE", "FECHA_CHAVE", "E_LOGICO", "E_BINARIO", "OU_LOGICO", "OU_BINARIO", 
 			"PONTO_PONTO", "PONTO", "VIRGULA", "PONTO_E_VIRGULA", "DOIS_PONTOS", 
-			"PORCENTO", "MAIOR", "MENOR", "IGUAL", "ATRIBUICAO", "EXCLAMACAO", "NUMERO", 
-			"COMENTARIO", "COMENTARIO_BLOCO", "STRING", "CHAR", "BOOLEANO", "MAIN", 
-			"FOR", "IN", "FUNCAO", "RETURN", "IF", "ELSE", "STRUCT", "TIPO", "WHILE", 
-			"DISPLAY", "INPUT", "VOID", "IDENTIFICADOR", "WS", "ESC"
+			"PORCENTO", "MAIOR", "MAIOR_IGUAL", "MENOR", "MENOR_IGUAL", "IGUAL", 
+			"DIFERENTE", "ATRIBUICAO", "EXCLAMACAO", "NUMERO", "COMENTARIO", "COMENTARIO_BLOCO", 
+			"STRING", "CHAR", "BOOLEANO", "MAIN", "FOR", "IN", "FUNCAO", "RETURN", 
+			"IF", "ELSE", "STRUCT", "TIPO", "WHILE", "DISPLAY", "INPUT", "VOID", 
+			"IDENTIFICADOR", "WS", "ESC"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -157,7 +158,7 @@ public class GramaticaParser extends Parser {
 			setState(38);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(35);
@@ -383,7 +384,7 @@ public class GramaticaParser extends Parser {
 			setState(65);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(62);
@@ -605,7 +606,7 @@ public class GramaticaParser extends Parser {
 			setState(105);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(102);
@@ -790,7 +791,7 @@ public class GramaticaParser extends Parser {
 			setState(124);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(121);
@@ -900,7 +901,7 @@ public class GramaticaParser extends Parser {
 			setState(146);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(143);
@@ -970,7 +971,7 @@ public class GramaticaParser extends Parser {
 			setState(156);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(153);
@@ -1051,7 +1052,7 @@ public class GramaticaParser extends Parser {
 			setState(169);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(166);
@@ -1138,7 +1139,7 @@ public class GramaticaParser extends Parser {
 			setState(184);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 207719919255680L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1661759354044544L) != 0)) {
 				{
 				{
 				setState(181);
@@ -1202,7 +1203,7 @@ public class GramaticaParser extends Parser {
 			setState(191);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 158344975220864L) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1266759801766016L) != 0)) {
 				{
 				setState(190);
 				expr(0);
@@ -1472,6 +1473,9 @@ public class GramaticaParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprContext extends ParserRuleContext {
+		public ExprContext lhs;
+		public Token op;
+		public ExprContext rhs;
 		public TerminalNode ABRE_PARENTESE() { return getToken(GramaticaParser.ABRE_PARENTESE, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -1503,6 +1507,8 @@ public class GramaticaParser extends Parser {
 		public TerminalNode IGUAL() { return getToken(GramaticaParser.IGUAL, 0); }
 		public TerminalNode MAIOR() { return getToken(GramaticaParser.MAIOR, 0); }
 		public TerminalNode MENOR() { return getToken(GramaticaParser.MENOR, 0); }
+		public TerminalNode MAIOR_IGUAL() { return getToken(GramaticaParser.MAIOR_IGUAL, 0); }
+		public TerminalNode MENOR_IGUAL() { return getToken(GramaticaParser.MENOR_IGUAL, 0); }
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1614,7 +1620,7 @@ public class GramaticaParser extends Parser {
 				setState(266);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 158344975220864L) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1266759801766016L) != 0)) {
 					{
 					setState(258);
 					expr(0);
@@ -1649,27 +1655,29 @@ public class GramaticaParser extends Parser {
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(293);
+			setState(286);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,24,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(291);
+					setState(284);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.lhs = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(272);
 						if (!(precpred(_ctx, 14))) throw new FailedPredicateException(this, "precpred(_ctx, 14)");
 						setState(273);
+						((ExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==MAIS || _la==MENOS) ) {
-						_errHandler.recoverInline(this);
+							((ExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -1677,19 +1685,21 @@ public class GramaticaParser extends Parser {
 							consume();
 						}
 						setState(274);
-						expr(15);
+						((ExprContext)_localctx).rhs = expr(15);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.lhs = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(275);
 						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
 						setState(276);
+						((ExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 4194352L) != 0)) ) {
-						_errHandler.recoverInline(this);
+							((ExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -1697,69 +1707,50 @@ public class GramaticaParser extends Parser {
 							consume();
 						}
 						setState(277);
-						expr(14);
+						((ExprContext)_localctx).rhs = expr(14);
 						}
 						break;
 					case 3:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.lhs = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(278);
 						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
 						setState(279);
-						match(IGUAL);
+						((ExprContext)_localctx).op = match(IGUAL);
 						setState(280);
-						expr(13);
+						((ExprContext)_localctx).rhs = expr(13);
 						}
 						break;
 					case 4:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.lhs = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(281);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
-						setState(288);
-						_errHandler.sync(this);
-						switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
-						case 1:
-							{
-							setState(282);
-							match(MAIOR);
-							}
-							break;
-						case 2:
-							{
-							setState(283);
-							match(MENOR);
-							}
-							break;
-						case 3:
-							{
-							setState(284);
-							match(MAIOR);
-							setState(285);
-							match(IGUAL);
-							}
-							break;
-						case 4:
-							{
-							setState(286);
-							match(MENOR);
-							setState(287);
-							match(IGUAL);
-							}
-							break;
+						setState(282);
+						((ExprContext)_localctx).op = _input.LT(1);
+						_la = _input.LA(1);
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 125829120L) != 0)) ) {
+							((ExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
-						setState(290);
-						expr(12);
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(283);
+						((ExprContext)_localctx).rhs = expr(12);
 						}
 						break;
 					}
 					} 
 				}
-				setState(295);
+				setState(288);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,24,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
 			}
 			}
 		}
@@ -1796,7 +1787,7 @@ public class GramaticaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u00011\u0129\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u00014\u0122\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -1838,56 +1829,55 @@ public class GramaticaParser extends Parser {
 		"\u0010\f\u0010\u0109\t\u0010\u0003\u0010\u010b\b\u0010\u0001\u0010\u0001"+
 		"\u0010\u0003\u0010\u010f\b\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
 		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
-		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
-		"\u0010\u0003\u0010\u0121\b\u0010\u0001\u0010\u0005\u0010\u0124\b\u0010"+
-		"\n\u0010\f\u0010\u0127\t\u0010\u0001\u0010\u0000\u0001 \u0011\u0000\u0002"+
-		"\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e"+
-		" \u0000\u0003\u0002\u0000**..\u0002\u0000\u0001\u0001\u0003\u0003\u0002"+
-		"\u0000\u0004\u0005\u0016\u0016\u0144\u0000\"\u0001\u0000\u0000\u0000\u0002"+
-		"5\u0001\u0000\u0000\u0000\u00047\u0001\u0000\u0000\u0000\u0006S\u0001"+
-		"\u0000\u0000\u0000\bU\u0001\u0000\u0000\u0000\nn\u0001\u0000\u0000\u0000"+
-		"\fq\u0001\u0000\u0000\u0000\u000et\u0001\u0000\u0000\u0000\u0010\u0089"+
-		"\u0001\u0000\u0000\u0000\u0012\u0097\u0001\u0000\u0000\u0000\u0014\u00a1"+
-		"\u0001\u0000\u0000\u0000\u0016\u00ae\u0001\u0000\u0000\u0000\u0018\u00bd"+
-		"\u0001\u0000\u0000\u0000\u001a\u00d0\u0001\u0000\u0000\u0000\u001c\u00d2"+
-		"\u0001\u0000\u0000\u0000\u001e\u00df\u0001\u0000\u0000\u0000 \u010e\u0001"+
-		"\u0000\u0000\u0000\"&\u0003\u0004\u0002\u0000#%\u0003\u0002\u0001\u0000"+
-		"$#\u0001\u0000\u0000\u0000%(\u0001\u0000\u0000\u0000&$\u0001\u0000\u0000"+
-		"\u0000&\'\u0001\u0000\u0000\u0000\')\u0001\u0000\u0000\u0000(&\u0001\u0000"+
-		"\u0000\u0000)*\u0005\u0000\u0000\u0001*\u0001\u0001\u0000\u0000\u0000"+
-		"+6\u0003\u0006\u0003\u0000,6\u0003\b\u0004\u0000-6\u0003\f\u0006\u0000"+
-		".6\u0003\u000e\u0007\u0000/6\u0003\u0014\n\u000006\u0003\u001c\u000e\u0000"+
-		"16\u0003\u001e\u000f\u000026\u0003\u0016\u000b\u000036\u0003\u0018\f\u0000"+
-		"46\u0003\u001a\r\u00005+\u0001\u0000\u0000\u00005,\u0001\u0000\u0000\u0000"+
-		"5-\u0001\u0000\u0000\u00005.\u0001\u0000\u0000\u00005/\u0001\u0000\u0000"+
-		"\u000050\u0001\u0000\u0000\u000051\u0001\u0000\u0000\u000052\u0001\u0000"+
-		"\u0000\u000053\u0001\u0000\u0000\u000054\u0001\u0000\u0000\u00006\u0003"+
-		"\u0001\u0000\u0000\u000078\u0005%\u0000\u000089\u0005\"\u0000\u00009:"+
-		"\u0005\u0007\u0000\u0000:;\u0005\b\u0000\u0000;<\u0005\u0002\u0000\u0000"+
-		"<=\u0005.\u0000\u0000=A\u0005\u000b\u0000\u0000>@\u0003\u0002\u0001\u0000"+
-		"?>\u0001\u0000\u0000\u0000@C\u0001\u0000\u0000\u0000A?\u0001\u0000\u0000"+
-		"\u0000AB\u0001\u0000\u0000\u0000BD\u0001\u0000\u0000\u0000CA\u0001\u0000"+
-		"\u0000\u0000DE\u0005\f\u0000\u0000E\u0005\u0001\u0000\u0000\u0000FG\u0005"+
-		"*\u0000\u0000GJ\u0005/\u0000\u0000HI\u0005\u001a\u0000\u0000IK\u0003 "+
-		"\u0010\u0000JH\u0001\u0000\u0000\u0000JK\u0001\u0000\u0000\u0000KL\u0001"+
-		"\u0000\u0000\u0000LT\u0005\u0014\u0000\u0000MN\u0005*\u0000\u0000NO\u0005"+
-		"/\u0000\u0000OP\u0005\t\u0000\u0000PQ\u0005\u001c\u0000\u0000QR\u0005"+
-		"\n\u0000\u0000RT\u0005\u0014\u0000\u0000SF\u0001\u0000\u0000\u0000SM\u0001"+
-		"\u0000\u0000\u0000T\u0007\u0001\u0000\u0000\u0000UV\u0005%\u0000\u0000"+
-		"VW\u0005/\u0000\u0000W`\u0005\u0007\u0000\u0000X]\u0003\n\u0005\u0000"+
-		"YZ\u0005\u0013\u0000\u0000Z\\\u0003\n\u0005\u0000[Y\u0001\u0000\u0000"+
-		"\u0000\\_\u0001\u0000\u0000\u0000][\u0001\u0000\u0000\u0000]^\u0001\u0000"+
-		"\u0000\u0000^a\u0001\u0000\u0000\u0000_]\u0001\u0000\u0000\u0000`X\u0001"+
-		"\u0000\u0000\u0000`a\u0001\u0000\u0000\u0000ab\u0001\u0000\u0000\u0000"+
-		"bc\u0005\b\u0000\u0000cd\u0005\u0002\u0000\u0000de\u0007\u0000\u0000\u0000"+
-		"ei\u0005\u000b\u0000\u0000fh\u0003\u0002\u0001\u0000gf\u0001\u0000\u0000"+
-		"\u0000hk\u0001\u0000\u0000\u0000ig\u0001\u0000\u0000\u0000ij\u0001\u0000"+
-		"\u0000\u0000jl\u0001\u0000\u0000\u0000ki\u0001\u0000\u0000\u0000lm\u0005"+
-		"\f\u0000\u0000m\t\u0001\u0000\u0000\u0000no\u0005*\u0000\u0000op\u0005"+
-		"/\u0000\u0000p\u000b\u0001\u0000\u0000\u0000qr\u0003 \u0010\u0000rs\u0005"+
-		"\u0014\u0000\u0000s\r\u0001\u0000\u0000\u0000tu\u0005\'\u0000\u0000uv"+
-		"\u0005\u0007\u0000\u0000vw\u0003 \u0010\u0000wx\u0005\b\u0000\u0000x|"+
-		"\u0005\u000b\u0000\u0000y{\u0003\u0002\u0001\u0000zy\u0001\u0000\u0000"+
+		"\u0010\u0001\u0010\u0001\u0010\u0005\u0010\u011d\b\u0010\n\u0010\f\u0010"+
+		"\u0120\t\u0010\u0001\u0010\u0000\u0001 \u0011\u0000\u0002\u0004\u0006"+
+		"\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \u0000\u0004"+
+		"\u0002\u0000--11\u0002\u0000\u0001\u0001\u0003\u0003\u0002\u0000\u0004"+
+		"\u0005\u0016\u0016\u0001\u0000\u0017\u001a\u013a\u0000\"\u0001\u0000\u0000"+
+		"\u0000\u00025\u0001\u0000\u0000\u0000\u00047\u0001\u0000\u0000\u0000\u0006"+
+		"S\u0001\u0000\u0000\u0000\bU\u0001\u0000\u0000\u0000\nn\u0001\u0000\u0000"+
+		"\u0000\fq\u0001\u0000\u0000\u0000\u000et\u0001\u0000\u0000\u0000\u0010"+
+		"\u0089\u0001\u0000\u0000\u0000\u0012\u0097\u0001\u0000\u0000\u0000\u0014"+
+		"\u00a1\u0001\u0000\u0000\u0000\u0016\u00ae\u0001\u0000\u0000\u0000\u0018"+
+		"\u00bd\u0001\u0000\u0000\u0000\u001a\u00d0\u0001\u0000\u0000\u0000\u001c"+
+		"\u00d2\u0001\u0000\u0000\u0000\u001e\u00df\u0001\u0000\u0000\u0000 \u010e"+
+		"\u0001\u0000\u0000\u0000\"&\u0003\u0004\u0002\u0000#%\u0003\u0002\u0001"+
+		"\u0000$#\u0001\u0000\u0000\u0000%(\u0001\u0000\u0000\u0000&$\u0001\u0000"+
+		"\u0000\u0000&\'\u0001\u0000\u0000\u0000\')\u0001\u0000\u0000\u0000(&\u0001"+
+		"\u0000\u0000\u0000)*\u0005\u0000\u0000\u0001*\u0001\u0001\u0000\u0000"+
+		"\u0000+6\u0003\u0006\u0003\u0000,6\u0003\b\u0004\u0000-6\u0003\f\u0006"+
+		"\u0000.6\u0003\u000e\u0007\u0000/6\u0003\u0014\n\u000006\u0003\u001c\u000e"+
+		"\u000016\u0003\u001e\u000f\u000026\u0003\u0016\u000b\u000036\u0003\u0018"+
+		"\f\u000046\u0003\u001a\r\u00005+\u0001\u0000\u0000\u00005,\u0001\u0000"+
+		"\u0000\u00005-\u0001\u0000\u0000\u00005.\u0001\u0000\u0000\u00005/\u0001"+
+		"\u0000\u0000\u000050\u0001\u0000\u0000\u000051\u0001\u0000\u0000\u0000"+
+		"52\u0001\u0000\u0000\u000053\u0001\u0000\u0000\u000054\u0001\u0000\u0000"+
+		"\u00006\u0003\u0001\u0000\u0000\u000078\u0005(\u0000\u000089\u0005%\u0000"+
+		"\u00009:\u0005\u0007\u0000\u0000:;\u0005\b\u0000\u0000;<\u0005\u0002\u0000"+
+		"\u0000<=\u00051\u0000\u0000=A\u0005\u000b\u0000\u0000>@\u0003\u0002\u0001"+
+		"\u0000?>\u0001\u0000\u0000\u0000@C\u0001\u0000\u0000\u0000A?\u0001\u0000"+
+		"\u0000\u0000AB\u0001\u0000\u0000\u0000BD\u0001\u0000\u0000\u0000CA\u0001"+
+		"\u0000\u0000\u0000DE\u0005\f\u0000\u0000E\u0005\u0001\u0000\u0000\u0000"+
+		"FG\u0005-\u0000\u0000GJ\u00052\u0000\u0000HI\u0005\u001d\u0000\u0000I"+
+		"K\u0003 \u0010\u0000JH\u0001\u0000\u0000\u0000JK\u0001\u0000\u0000\u0000"+
+		"KL\u0001\u0000\u0000\u0000LT\u0005\u0014\u0000\u0000MN\u0005-\u0000\u0000"+
+		"NO\u00052\u0000\u0000OP\u0005\t\u0000\u0000PQ\u0005\u001f\u0000\u0000"+
+		"QR\u0005\n\u0000\u0000RT\u0005\u0014\u0000\u0000SF\u0001\u0000\u0000\u0000"+
+		"SM\u0001\u0000\u0000\u0000T\u0007\u0001\u0000\u0000\u0000UV\u0005(\u0000"+
+		"\u0000VW\u00052\u0000\u0000W`\u0005\u0007\u0000\u0000X]\u0003\n\u0005"+
+		"\u0000YZ\u0005\u0013\u0000\u0000Z\\\u0003\n\u0005\u0000[Y\u0001\u0000"+
+		"\u0000\u0000\\_\u0001\u0000\u0000\u0000][\u0001\u0000\u0000\u0000]^\u0001"+
+		"\u0000\u0000\u0000^a\u0001\u0000\u0000\u0000_]\u0001\u0000\u0000\u0000"+
+		"`X\u0001\u0000\u0000\u0000`a\u0001\u0000\u0000\u0000ab\u0001\u0000\u0000"+
+		"\u0000bc\u0005\b\u0000\u0000cd\u0005\u0002\u0000\u0000de\u0007\u0000\u0000"+
+		"\u0000ei\u0005\u000b\u0000\u0000fh\u0003\u0002\u0001\u0000gf\u0001\u0000"+
+		"\u0000\u0000hk\u0001\u0000\u0000\u0000ig\u0001\u0000\u0000\u0000ij\u0001"+
+		"\u0000\u0000\u0000jl\u0001\u0000\u0000\u0000ki\u0001\u0000\u0000\u0000"+
+		"lm\u0005\f\u0000\u0000m\t\u0001\u0000\u0000\u0000no\u0005-\u0000\u0000"+
+		"op\u00052\u0000\u0000p\u000b\u0001\u0000\u0000\u0000qr\u0003 \u0010\u0000"+
+		"rs\u0005\u0014\u0000\u0000s\r\u0001\u0000\u0000\u0000tu\u0005*\u0000\u0000"+
+		"uv\u0005\u0007\u0000\u0000vw\u0003 \u0010\u0000wx\u0005\b\u0000\u0000"+
+		"x|\u0005\u000b\u0000\u0000y{\u0003\u0002\u0001\u0000zy\u0001\u0000\u0000"+
 		"\u0000{~\u0001\u0000\u0000\u0000|z\u0001\u0000\u0000\u0000|}\u0001\u0000"+
 		"\u0000\u0000}\u007f\u0001\u0000\u0000\u0000~|\u0001\u0000\u0000\u0000"+
 		"\u007f\u0083\u0005\f\u0000\u0000\u0080\u0082\u0003\u0010\b\u0000\u0081"+
@@ -1896,51 +1886,51 @@ public class GramaticaParser extends Parser {
 		"\u0087\u0001\u0000\u0000\u0000\u0085\u0083\u0001\u0000\u0000\u0000\u0086"+
 		"\u0088\u0003\u0012\t\u0000\u0087\u0086\u0001\u0000\u0000\u0000\u0087\u0088"+
 		"\u0001\u0000\u0000\u0000\u0088\u000f\u0001\u0000\u0000\u0000\u0089\u008a"+
-		"\u0005(\u0000\u0000\u008a\u008b\u0005\'\u0000\u0000\u008b\u008c\u0005"+
-		"\u0007\u0000\u0000\u008c\u008d\u0003 \u0010\u0000\u008d\u008e\u0005\b"+
-		"\u0000\u0000\u008e\u0092\u0005\u000b\u0000\u0000\u008f\u0091\u0003\u0002"+
-		"\u0001\u0000\u0090\u008f\u0001\u0000\u0000\u0000\u0091\u0094\u0001\u0000"+
-		"\u0000\u0000\u0092\u0090\u0001\u0000\u0000\u0000\u0092\u0093\u0001\u0000"+
-		"\u0000\u0000\u0093\u0095\u0001\u0000\u0000\u0000\u0094\u0092\u0001\u0000"+
-		"\u0000\u0000\u0095\u0096\u0005\f\u0000\u0000\u0096\u0011\u0001\u0000\u0000"+
-		"\u0000\u0097\u0098\u0005(\u0000\u0000\u0098\u009c\u0005\u000b\u0000\u0000"+
-		"\u0099\u009b\u0003\u0002\u0001\u0000\u009a\u0099\u0001\u0000\u0000\u0000"+
-		"\u009b\u009e\u0001\u0000\u0000\u0000\u009c\u009a\u0001\u0000\u0000\u0000"+
-		"\u009c\u009d\u0001\u0000\u0000\u0000\u009d\u009f\u0001\u0000\u0000\u0000"+
-		"\u009e\u009c\u0001\u0000\u0000\u0000\u009f\u00a0\u0005\f\u0000\u0000\u00a0"+
-		"\u0013\u0001\u0000\u0000\u0000\u00a1\u00a2\u0005+\u0000\u0000\u00a2\u00a3"+
-		"\u0005\u0007\u0000\u0000\u00a3\u00a4\u0003 \u0010\u0000\u00a4\u00a5\u0005"+
-		"\b\u0000\u0000\u00a5\u00a9\u0005\u000b\u0000\u0000\u00a6\u00a8\u0003\u0002"+
+		"\u0005+\u0000\u0000\u008a\u008b\u0005*\u0000\u0000\u008b\u008c\u0005\u0007"+
+		"\u0000\u0000\u008c\u008d\u0003 \u0010\u0000\u008d\u008e\u0005\b\u0000"+
+		"\u0000\u008e\u0092\u0005\u000b\u0000\u0000\u008f\u0091\u0003\u0002\u0001"+
+		"\u0000\u0090\u008f\u0001\u0000\u0000\u0000\u0091\u0094\u0001\u0000\u0000"+
+		"\u0000\u0092\u0090\u0001\u0000\u0000\u0000\u0092\u0093\u0001\u0000\u0000"+
+		"\u0000\u0093\u0095\u0001\u0000\u0000\u0000\u0094\u0092\u0001\u0000\u0000"+
+		"\u0000\u0095\u0096\u0005\f\u0000\u0000\u0096\u0011\u0001\u0000\u0000\u0000"+
+		"\u0097\u0098\u0005+\u0000\u0000\u0098\u009c\u0005\u000b\u0000\u0000\u0099"+
+		"\u009b\u0003\u0002\u0001\u0000\u009a\u0099\u0001\u0000\u0000\u0000\u009b"+
+		"\u009e\u0001\u0000\u0000\u0000\u009c\u009a\u0001\u0000\u0000\u0000\u009c"+
+		"\u009d\u0001\u0000\u0000\u0000\u009d\u009f\u0001\u0000\u0000\u0000\u009e"+
+		"\u009c\u0001\u0000\u0000\u0000\u009f\u00a0\u0005\f\u0000\u0000\u00a0\u0013"+
+		"\u0001\u0000\u0000\u0000\u00a1\u00a2\u0005.\u0000\u0000\u00a2\u00a3\u0005"+
+		"\u0007\u0000\u0000\u00a3\u00a4\u0003 \u0010\u0000\u00a4\u00a5\u0005\b"+
+		"\u0000\u0000\u00a5\u00a9\u0005\u000b\u0000\u0000\u00a6\u00a8\u0003\u0002"+
 		"\u0001\u0000\u00a7\u00a6\u0001\u0000\u0000\u0000\u00a8\u00ab\u0001\u0000"+
 		"\u0000\u0000\u00a9\u00a7\u0001\u0000\u0000\u0000\u00a9\u00aa\u0001\u0000"+
 		"\u0000\u0000\u00aa\u00ac\u0001\u0000\u0000\u0000\u00ab\u00a9\u0001\u0000"+
 		"\u0000\u0000\u00ac\u00ad\u0005\f\u0000\u0000\u00ad\u0015\u0001\u0000\u0000"+
-		"\u0000\u00ae\u00af\u0005#\u0000\u0000\u00af\u00b0\u0005/\u0000\u0000\u00b0"+
-		"\u00b1\u0005$\u0000\u0000\u00b1\u00b2\u0005\u001c\u0000\u0000\u00b2\u00b3"+
-		"\u0005\u0011\u0000\u0000\u00b3\u00b4\u0005\u001c\u0000\u0000\u00b4\u00b8"+
+		"\u0000\u00ae\u00af\u0005&\u0000\u0000\u00af\u00b0\u00052\u0000\u0000\u00b0"+
+		"\u00b1\u0005\'\u0000\u0000\u00b1\u00b2\u0005\u001f\u0000\u0000\u00b2\u00b3"+
+		"\u0005\u0011\u0000\u0000\u00b3\u00b4\u0005\u001f\u0000\u0000\u00b4\u00b8"+
 		"\u0005\u000b\u0000\u0000\u00b5\u00b7\u0003\u0002\u0001\u0000\u00b6\u00b5"+
 		"\u0001\u0000\u0000\u0000\u00b7\u00ba\u0001\u0000\u0000\u0000\u00b8\u00b6"+
 		"\u0001\u0000\u0000\u0000\u00b8\u00b9\u0001\u0000\u0000\u0000\u00b9\u00bb"+
 		"\u0001\u0000\u0000\u0000\u00ba\u00b8\u0001\u0000\u0000\u0000\u00bb\u00bc"+
 		"\u0005\f\u0000\u0000\u00bc\u0017\u0001\u0000\u0000\u0000\u00bd\u00bf\u0005"+
-		"&\u0000\u0000\u00be\u00c0\u0003 \u0010\u0000\u00bf\u00be\u0001\u0000\u0000"+
+		")\u0000\u0000\u00be\u00c0\u0003 \u0010\u0000\u00bf\u00be\u0001\u0000\u0000"+
 		"\u0000\u00bf\u00c0\u0001\u0000\u0000\u0000\u00c0\u00c1\u0001\u0000\u0000"+
 		"\u0000\u00c1\u00c2\u0005\u0014\u0000\u0000\u00c2\u0019\u0001\u0000\u0000"+
-		"\u0000\u00c3\u00c4\u0005/\u0000\u0000\u00c4\u00c5\u0005\u001a\u0000\u0000"+
+		"\u0000\u00c3\u00c4\u00052\u0000\u0000\u00c4\u00c5\u0005\u001d\u0000\u0000"+
 		"\u00c5\u00c6\u0003 \u0010\u0000\u00c6\u00c7\u0005\u0014\u0000\u0000\u00c7"+
-		"\u00d1\u0001\u0000\u0000\u0000\u00c8\u00c9\u0005/\u0000\u0000\u00c9\u00ca"+
+		"\u00d1\u0001\u0000\u0000\u0000\u00c8\u00c9\u00052\u0000\u0000\u00c9\u00ca"+
 		"\u0005\t\u0000\u0000\u00ca\u00cb\u0003 \u0010\u0000\u00cb\u00cc\u0005"+
-		"\n\u0000\u0000\u00cc\u00cd\u0005\u001a\u0000\u0000\u00cd\u00ce\u0003 "+
+		"\n\u0000\u0000\u00cc\u00cd\u0005\u001d\u0000\u0000\u00cd\u00ce\u0003 "+
 		"\u0010\u0000\u00ce\u00cf\u0005\u0014\u0000\u0000\u00cf\u00d1\u0001\u0000"+
 		"\u0000\u0000\u00d0\u00c3\u0001\u0000\u0000\u0000\u00d0\u00c8\u0001\u0000"+
-		"\u0000\u0000\u00d1\u001b\u0001\u0000\u0000\u0000\u00d2\u00d3\u0005,\u0000"+
+		"\u0000\u0000\u00d1\u001b\u0001\u0000\u0000\u0000\u00d2\u00d3\u0005/\u0000"+
 		"\u0000\u00d3\u00d4\u0005\u0007\u0000\u0000\u00d4\u00d9\u0003 \u0010\u0000"+
 		"\u00d5\u00d6\u0005\u0013\u0000\u0000\u00d6\u00d8\u0003 \u0010\u0000\u00d7"+
 		"\u00d5\u0001\u0000\u0000\u0000\u00d8\u00db\u0001\u0000\u0000\u0000\u00d9"+
 		"\u00d7\u0001\u0000\u0000\u0000\u00d9\u00da\u0001\u0000\u0000\u0000\u00da"+
 		"\u00dc\u0001\u0000\u0000\u0000\u00db\u00d9\u0001\u0000\u0000\u0000\u00dc"+
 		"\u00dd\u0005\b\u0000\u0000\u00dd\u00de\u0005\u0014\u0000\u0000\u00de\u001d"+
-		"\u0001\u0000\u0000\u0000\u00df\u00e0\u0005-\u0000\u0000\u00e0\u00e1\u0005"+
+		"\u0001\u0000\u0000\u0000\u00df\u00e0\u00050\u0000\u0000\u00e0\u00e1\u0005"+
 		"\u0007\u0000\u0000\u00e1\u00e6\u0003 \u0010\u0000\u00e2\u00e3\u0005\u0013"+
 		"\u0000\u0000\u00e3\u00e5\u0003 \u0010\u0000\u00e4\u00e2\u0001\u0000\u0000"+
 		"\u0000\u00e5\u00e8\u0001\u0000\u0000\u0000\u00e6\u00e4\u0001\u0000\u0000"+
@@ -1949,14 +1939,14 @@ public class GramaticaParser extends Parser {
 		"\u00ea\u00eb\u0005\u0014\u0000\u0000\u00eb\u001f\u0001\u0000\u0000\u0000"+
 		"\u00ec\u00ed\u0006\u0010\uffff\uffff\u0000\u00ed\u00ee\u0005\u0007\u0000"+
 		"\u0000\u00ee\u00ef\u0003 \u0010\u0000\u00ef\u00f0\u0005\b\u0000\u0000"+
-		"\u00f0\u010f\u0001\u0000\u0000\u0000\u00f1\u010f\u0005\u001c\u0000\u0000"+
-		"\u00f2\u010f\u0005\u001f\u0000\u0000\u00f3\u010f\u0005 \u0000\u0000\u00f4"+
-		"\u010f\u0005!\u0000\u0000\u00f5\u010f\u0005/\u0000\u0000\u00f6\u00f7\u0005"+
-		"/\u0000\u0000\u00f7\u00f8\u0005\t\u0000\u0000\u00f8\u00f9\u0003 \u0010"+
+		"\u00f0\u010f\u0001\u0000\u0000\u0000\u00f1\u010f\u0005\u001f\u0000\u0000"+
+		"\u00f2\u010f\u0005\"\u0000\u0000\u00f3\u010f\u0005#\u0000\u0000\u00f4"+
+		"\u010f\u0005$\u0000\u0000\u00f5\u010f\u00052\u0000\u0000\u00f6\u00f7\u0005"+
+		"2\u0000\u0000\u00f7\u00f8\u0005\t\u0000\u0000\u00f8\u00f9\u0003 \u0010"+
 		"\u0000\u00f9\u00fa\u0005\n\u0000\u0000\u00fa\u010f\u0001\u0000\u0000\u0000"+
-		"\u00fb\u00fc\u0005,\u0000\u0000\u00fc\u00fd\u0005\u0007\u0000\u0000\u00fd"+
+		"\u00fb\u00fc\u0005/\u0000\u0000\u00fc\u00fd\u0005\u0007\u0000\u0000\u00fd"+
 		"\u00fe\u0003 \u0010\u0000\u00fe\u00ff\u0005\b\u0000\u0000\u00ff\u010f"+
-		"\u0001\u0000\u0000\u0000\u0100\u0101\u0005/\u0000\u0000\u0101\u010a\u0005"+
+		"\u0001\u0000\u0000\u0000\u0100\u0101\u00052\u0000\u0000\u0101\u010a\u0005"+
 		"\u0007\u0000\u0000\u0102\u0107\u0003 \u0010\u0000\u0103\u0104\u0005\u0013"+
 		"\u0000\u0000\u0104\u0106\u0003 \u0010\u0000\u0105\u0103\u0001\u0000\u0000"+
 		"\u0000\u0106\u0109\u0001\u0000\u0000\u0000\u0107\u0105\u0001\u0000\u0000"+
@@ -1969,23 +1959,18 @@ public class GramaticaParser extends Parser {
 		"\u010e\u00f4\u0001\u0000\u0000\u0000\u010e\u00f5\u0001\u0000\u0000\u0000"+
 		"\u010e\u00f6\u0001\u0000\u0000\u0000\u010e\u00fb\u0001\u0000\u0000\u0000"+
 		"\u010e\u0100\u0001\u0000\u0000\u0000\u010e\u010d\u0001\u0000\u0000\u0000"+
-		"\u010f\u0125\u0001\u0000\u0000\u0000\u0110\u0111\n\u000e\u0000\u0000\u0111"+
-		"\u0112\u0007\u0001\u0000\u0000\u0112\u0124\u0003 \u0010\u000f\u0113\u0114"+
-		"\n\r\u0000\u0000\u0114\u0115\u0007\u0002\u0000\u0000\u0115\u0124\u0003"+
-		" \u0010\u000e\u0116\u0117\n\f\u0000\u0000\u0117\u0118\u0005\u0019\u0000"+
-		"\u0000\u0118\u0124\u0003 \u0010\r\u0119\u0120\n\u000b\u0000\u0000\u011a"+
-		"\u0121\u0005\u0017\u0000\u0000\u011b\u0121\u0005\u0018\u0000\u0000\u011c"+
-		"\u011d\u0005\u0017\u0000\u0000\u011d\u0121\u0005\u0019\u0000\u0000\u011e"+
-		"\u011f\u0005\u0018\u0000\u0000\u011f\u0121\u0005\u0019\u0000\u0000\u0120"+
-		"\u011a\u0001\u0000\u0000\u0000\u0120\u011b\u0001\u0000\u0000\u0000\u0120"+
-		"\u011c\u0001\u0000\u0000\u0000\u0120\u011e\u0001\u0000\u0000\u0000\u0121"+
-		"\u0122\u0001\u0000\u0000\u0000\u0122\u0124\u0003 \u0010\f\u0123\u0110"+
-		"\u0001\u0000\u0000\u0000\u0123\u0113\u0001\u0000\u0000\u0000\u0123\u0116"+
-		"\u0001\u0000\u0000\u0000\u0123\u0119\u0001\u0000\u0000\u0000\u0124\u0127"+
-		"\u0001\u0000\u0000\u0000\u0125\u0123\u0001\u0000\u0000\u0000\u0125\u0126"+
-		"\u0001\u0000\u0000\u0000\u0126!\u0001\u0000\u0000\u0000\u0127\u0125\u0001"+
-		"\u0000\u0000\u0000\u0019&5AJS]`i|\u0083\u0087\u0092\u009c\u00a9\u00b8"+
-		"\u00bf\u00d0\u00d9\u00e6\u0107\u010a\u010e\u0120\u0123\u0125";
+		"\u010f\u011e\u0001\u0000\u0000\u0000\u0110\u0111\n\u000e\u0000\u0000\u0111"+
+		"\u0112\u0007\u0001\u0000\u0000\u0112\u011d\u0003 \u0010\u000f\u0113\u0114"+
+		"\n\r\u0000\u0000\u0114\u0115\u0007\u0002\u0000\u0000\u0115\u011d\u0003"+
+		" \u0010\u000e\u0116\u0117\n\f\u0000\u0000\u0117\u0118\u0005\u001b\u0000"+
+		"\u0000\u0118\u011d\u0003 \u0010\r\u0119\u011a\n\u000b\u0000\u0000\u011a"+
+		"\u011b\u0007\u0003\u0000\u0000\u011b\u011d\u0003 \u0010\f\u011c\u0110"+
+		"\u0001\u0000\u0000\u0000\u011c\u0113\u0001\u0000\u0000\u0000\u011c\u0116"+
+		"\u0001\u0000\u0000\u0000\u011c\u0119\u0001\u0000\u0000\u0000\u011d\u0120"+
+		"\u0001\u0000\u0000\u0000\u011e\u011c\u0001\u0000\u0000\u0000\u011e\u011f"+
+		"\u0001\u0000\u0000\u0000\u011f!\u0001\u0000\u0000\u0000\u0120\u011e\u0001"+
+		"\u0000\u0000\u0000\u0018&5AJS]`i|\u0083\u0087\u0092\u009c\u00a9\u00b8"+
+		"\u00bf\u00d0\u00d9\u00e6\u0107\u010a\u010e\u011c\u011e";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -7,25 +7,24 @@ import java.util.Map;
 
 import fejosa.GramaticaParser.ExprContext;
 
-public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
+public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
 
     private Map<String, String> tabelaSimbolos = new HashMap<>();
 
     // verificar se variaveis já foram declaradas e o tipo de atribuição
     @Override
-    public Void visitVarDecl(GramaticaParser.VarDeclContext ctx) {
-        String tipo = ctx.TIPO().getText();
+    public Boolean visitVarDecl(GramaticaParser.VarDeclContext ctx) { String tipo = ctx.TIPO().getText();
         String nome = ctx.IDENTIFICADOR().getText();
         String tipoEsperado = verificarTipo(ctx.expr());
+        boolean erro = true;
 
         // Verifica se a variável já foi declarada
         if (tabelaSimbolos.containsKey(nome)) {
-            System.out.println("! ERRO SEMÂNTICO (variável já declarada) - var -> " + "( " + nome + " )");
+            System.out.println("! ERRO SEMÂNTICO: (variável já declarada) - var -> " + "( " + nome + " )");
         } else {
             if (tipo.equals(tipoEsperado)) {
                 tabelaSimbolos.put(nome, tipo);
             } else {
-                boolean erro = true;
                 switch (tipo) {
                     case "f32":
                     case "f64": {
@@ -60,25 +59,25 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
                 }
             }
         }
-        return null;
+        return erro;
     }
 
     // verifica se veriavel já foi definida antes de utilizada-la e expressões dela
     @Override
-    public Void visitAssignStmt(GramaticaParser.AssignStmtContext ctx) {
+    public Boolean visitAssignStmt(GramaticaParser.AssignStmtContext ctx) {
         String nome = ctx.IDENTIFICADOR().getText();
         String tipoEsperado = tabelaSimbolos.get(nome);
+        boolean erro = false;
 
         // Verifica se a variável foi declarada
         if (tipoEsperado == null) {
-            System.err.println("! ERRO SEMÂNTICO (variável não declarada) - var -> " + "( " + nome + " )");
+            System.err.println("! ERRO SEMÂNTICO: (variável não declarada) - var -> " + "( " + nome + " )");
         } else {
             // verifica cada exp individual
 
             for (int i = 0; i < ctx.expr(0).expr().size(); i++) {
                 String tipoAtribuido = verificarTipo(ctx.expr(0).expr(i));
                 if (!tipoEsperado.equals(tipoAtribuido)) {
-                    boolean erro = false;
                     switch (tipoEsperado) {
                         case "f32":
                         case "f64": {
@@ -111,8 +110,48 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
 
         }
 
-        return null;
+        return erro;
     }
+
+    @Override
+    public Boolean visitStmt(GramaticaParser.StmtContext ctx) {
+        System.out.println("STATEMENT");
+        System.out.println(ctx.getText());
+        if (ctx.ifStmt() != null) {
+            visitIfStmt(ctx.ifStmt());
+        }
+
+        return true;
+    }
+
+    @Override
+    public Boolean visitExprStmt(GramaticaParser.ExprStmtContext ctx) {
+        System.out.println("EXPRESSION STATEMENT");
+        System.out.println(ctx.getText());
+
+        return true;
+    }
+
+    @Override
+    public Boolean visitExpr(GramaticaParser.ExprContext ctx) {
+        System.out.println("EXPRESSION");
+        int tipo = ctx.op.getType();
+        if (tipo == GramaticaLexer.MAIOR || tipo == GramaticaLexer.MENOR || tipo == GramaticaLexer.MAIOR_IGUAL || tipo == GramaticaLexer.MENOR_IGUAL || tipo == GramaticaLexer.IGUAL || tipo == GramaticaLexer.DIFERENTE) {
+
+        }
+
+        return true;
+    }
+
+    @Override
+    public Boolean visitIfStmt(GramaticaParser.IfStmtContext ctx) {
+        System.out.println("IF STATEMENT:");
+        System.out.println(ctx.getText());
+        boolean erro = visitExpr(ctx.expr());
+
+        return true;
+    }
+    
 
     // Método para exibir a tabela de símbolos
     public void exibirTabelaSimbolos() {

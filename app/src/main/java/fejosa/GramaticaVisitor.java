@@ -1,5 +1,5 @@
-package fejosa;
 // Generated from app/src/main/antlr/Gramatica.g4 by ANTLR 4.13.2
+package fejosa;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

@@ -1,4 +1,6 @@
 fn main() -> void{
+    u32 x = 10;
+    u32 y = 11;
 	if (x > 0) {
 		display("x é positivo");
 	}
