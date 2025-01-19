@@ -28,7 +28,7 @@ MENOR: '<';
 IGUAL: '==';
 ATRIBUICAO: '=';
 EXCLAMACAO: '!';
-NUMERO: [0-9]+ ('.' [0-9]+)?;
+NUMERO: [\-]?[0-9]+ ('.' [0-9]+)?;
 COMENTARIO: '//' ~[\r\n]* -> skip;
 COMENTARIO_BLOCO: '/*' .*? '*/' -> skip;
 STRING: '"' (ESC | ~["\\])* '"';

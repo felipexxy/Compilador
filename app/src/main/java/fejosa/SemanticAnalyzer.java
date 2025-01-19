@@ -25,9 +25,39 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
             if (tipo.equals(tipoEsperado)) {
                 tabelaSimbolos.put(nome, tipo);
             } else {
-                System.out.println("! ERRO SEMÂNTICO: (variável com tipos incompatívei) - var -> " + "( " + nome + " )"
+                boolean erro = true;
+                switch (tipo) {
+                    case "f32":
+                    case "f64": {
+                        if (tipoEsperado.equals("real") || tipoEsperado.equals("intneg") || tipoEsperado.equals("int")) {
+                            tabelaSimbolos.put(nome, tipo);
+                            erro = false;
+                        }
+                    } break;
+                    case "i8":
+                    case "i16":
+                    case "i32":
+                    case "i64": {
+                        if (tipoEsperado.equals("intneg") || tipoEsperado.equals("int")) {
+                            tabelaSimbolos.put(nome, tipo);
+                            erro = false;
+                        }
+                    } break;
+                    case "u8":
+                    case "u16":
+                    case "u32":
+                    case "u64": {
+                        if (tipoEsperado.equals("int")) {
+                            tabelaSimbolos.put(nome, tipo);
+                            erro = false;
+                        }
+                    } break;
+                }
+                if (erro) {
+                    System.out.println("! ERRO SEMÂNTICO: (variável com tipos incompatívei) - var -> " + "( " + nome + " )"
                         + " - tipo esperado: " + "( " + tipo + " )" + " - tipo encontrado:" + "( " + tipoEsperado
                         + " )");
+                }
             }
         }
         return null;
@@ -48,12 +78,34 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
             for (int i = 0; i < ctx.expr(0).expr().size(); i++) {
                 String tipoAtribuido = verificarTipo(ctx.expr(0).expr(i));
                 if (!tipoEsperado.equals(tipoAtribuido)) {
-                    System.out.println(
+                    boolean erro = false;
+                    switch (tipoEsperado) {
+                        case "f32":
+                        case "f64": {
+                            erro = !(tipoAtribuido.equals("real") || tipoAtribuido.equals("intneg") || tipoAtribuido.equals("int"));
+                        } break;
+                        case "i8":
+                        case "i16":
+                        case "i32":
+                        case "i64": {
+                            erro = !(tipoAtribuido.equals("intneg") || tipoAtribuido.equals("int"));
+                        } break;
+                        case "u8":
+                        case "u16":
+                        case "u32":
+                        case "u64": {
+                            erro = !tipoAtribuido.equals("int");
+                        } break;
+                    }
+
+                    if (erro) {
+                        System.out.println(
                             "! ERRO SEMÂNTICO: (variável com tipos incompatívei) - var -> " + "( " + nome + " )"
-                                    + " - tipo esperado: " + "( " + tipoEsperado + " )" + " - tipo encontrado:"
-                                    + "( "
-                                    + tipoAtribuido
-                                    + " )");
+                            + " - tipo esperado: " + "( " + tipoEsperado + " )" + " - tipo encontrado:"
+                            + "( "
+                            + tipoAtribuido
+                            + " )");
+                    }
                 }
             }
 
@@ -83,12 +135,13 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Void> {
     // i8 x = 10;)
     private String verificarTipo(GramaticaParser.ExprContext ctx) {
         if (ctx.NUMERO() != null) {
-            if (ctx.NUMERO().getText().contains(".")) { // verifica se numero é float
-                // return "f32";
-                return "real"; // f32 ou f64
+            String numStr = ctx.NUMERO().getText();
+            if (numStr.contains(".")) {
+                return "real";
+            } else if (numStr.contains("-")) {
+                return "intneg";
             } else {
-                // return "i8";
-                return "inteiro"; // 8 alternativas
+                return "int";
             }
         } else if (ctx.STRING() != null) {
             return "string";
