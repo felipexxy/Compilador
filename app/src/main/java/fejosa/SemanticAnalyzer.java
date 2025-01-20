@@ -173,9 +173,17 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
         if (ctx.expr(0).IDENTIFICADOR() != null) {
             String id1 = ctx.expr(0).IDENTIFICADOR().getText();
             String tipoId1 = tabelaSimbolos.get(id1);
+            if (tipoId1 == null) {
+                System.err.println("! ERRO SEMÂNTICO: (variável não declarada) - var -> " + "( " + id1 + " )");
+                return false;
+            }
             if (ctx.expr(1).IDENTIFICADOR() != null) {
                 String id2 = ctx.expr(1).IDENTIFICADOR().getText();
                 String tipoId2 = tabelaSimbolos.get(id2);
+                if (tipoId2 == null) {
+                    System.err.println("! ERRO SEMÂNTICO: (variável não declarada) - var -> " + "( " + id2 + " )");
+                    return false;
+                }
                 switch (tipoId1) {
                     case "f32":
                     case "f64": {
@@ -240,6 +248,10 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
             if (ctx.expr(1).IDENTIFICADOR() != null) {
                 String id2 = ctx.expr(1).IDENTIFICADOR().getText();
                 String tipoId2 = tabelaSimbolos.get(id2);
+                if (tipoId2 == null) {
+                    System.err.println("! ERRO SEMÂNTICO: (variável não declarada) - var -> " + "( " + id2 + " )");
+                    return false;
+                }
                 switch (tipo) {
                     case "real": {
                         sucesso = tipoId2.equals("f32") || tipoId2.equals("f64");
@@ -280,7 +292,8 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
 
     @Override
     public Boolean visitWhileStmt(GramaticaParser.WhileStmtContext ctx) {
-        boolean sucesso = true;
+        boolean sucesso = visitBoolExpr(ctx.boolExpr());
+        
         return sucesso;
     }
 

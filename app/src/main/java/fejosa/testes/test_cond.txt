@@ -16,6 +16,10 @@ fn main() -> void{
 		display("x não é positivo");
 	}
 
+    if (ronaldo > 10) {
+        display("ronaldinho");
+    }
+
 	if (x > 0) {
 		display("x é positivo");
 	} else if (x == 13.34) {
