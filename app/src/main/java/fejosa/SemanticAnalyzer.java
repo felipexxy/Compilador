@@ -127,6 +127,8 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
             visitVarDecl(ctx.varDecl());
         } else if (ctx.assignStmt() != null) {
             visitAssignStmt(ctx.assignStmt());
+        } else if (ctx.whileStmt() != null) {
+            visitWhileStmt(ctx.whileStmt());
         }
 
         return true;
@@ -149,16 +151,24 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
 
     @Override
     public Boolean visitIfStmt(GramaticaParser.IfStmtContext ctx) {
-        System.out.println("IF STATEMENT:");
-        System.out.println(ctx.getText());
-        visitBoolExpr(ctx.boolExpr());
+        boolean sucesso = visitBoolExpr(ctx.boolExpr());
+        for (GramaticaParser.ElseIfStmtContext stmt : ctx.elseIfStmt()) {
+            if (!visitElseIfStmt(stmt)) {
+                sucesso = false;
+                break;
+            }
+        }
 
-        return true;
+        return sucesso;
+    }
+
+    @Override
+    public Boolean visitElseIfStmt(GramaticaParser.ElseIfStmtContext ctx) {
+        return visitBoolExpr(ctx.boolExpr());
     }
 
     @Override
     public Boolean visitBoolExpr(GramaticaParser.BoolExprContext ctx) {
-        System.out.println("Expressao booleana");
         boolean sucesso = true;
         if (ctx.expr(0).IDENTIFICADOR() != null) {
             String id1 = ctx.expr(0).IDENTIFICADOR().getText();
@@ -221,7 +231,7 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
                     } break;
                     case "desconhecido": sucesso = false; break;
                     default: {
-                        tipo.equals(tipoId1);
+                        sucesso = tipo.equals(tipoId1);
                     } break;
                 }
             }
@@ -241,12 +251,16 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
                         sucesso = tipoId2.equals("f32") || tipoId2.equals("f64") || tipoId2.equals("i8") || tipoId2.equals("i16") || tipoId2.equals("i32") || tipoId2.equals("i64") || tipoId2.equals("u8") || tipoId2.equals("u16") || tipoId2.equals("u32") || tipoId2.equals("u64");
                     } break;
                     case "desconhecido": sucesso = false; break;
-                    default: sucesso = tipoId2.equals(tipoId2); break;
+                    default: sucesso = tipo.equals(tipoId2); break;
                 }
             } else {
                 String tipo2 = verificarTipo(ctx.expr(1));
                 sucesso = tipo.equals(tipo2);
             }
+        }
+
+        if (!sucesso) {
+            System.out.println("! ERRO SEMÂNTICO: (expressão não booleana) - expressão -> " + "( " + ctx.getText() + " )");
         }
 
         return sucesso;
@@ -261,6 +275,12 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
             funcaoParametros.put(ctx.IDENTIFICADOR().getText(), ctx.paramDecl());
         }
 
+        return sucesso;
+    }
+
+    @Override
+    public Boolean visitWhileStmt(GramaticaParser.WhileStmtContext ctx) {
+        boolean sucesso = true;
         return sucesso;
     }
 

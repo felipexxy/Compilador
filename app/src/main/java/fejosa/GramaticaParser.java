@@ -1052,8 +1052,8 @@ public class GramaticaParser extends Parser {
 		public TerminalNode ELSE() { return getToken(GramaticaParser.ELSE, 0); }
 		public TerminalNode IF() { return getToken(GramaticaParser.IF, 0); }
 		public TerminalNode ABRE_PARENTESE() { return getToken(GramaticaParser.ABRE_PARENTESE, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+		public BoolExprContext boolExpr() {
+			return getRuleContext(BoolExprContext.class,0);
 		}
 		public TerminalNode FECHA_PARENTESE() { return getToken(GramaticaParser.FECHA_PARENTESE, 0); }
 		public TerminalNode ABRE_CHAVE() { return getToken(GramaticaParser.ABRE_CHAVE, 0); }
@@ -1097,7 +1097,7 @@ public class GramaticaParser extends Parser {
 			setState(175);
 			match(ABRE_PARENTESE);
 			setState(176);
-			expr(0);
+			boolExpr();
 			setState(177);
 			match(FECHA_PARENTESE);
 			setState(178);
@@ -1205,8 +1205,8 @@ public class GramaticaParser extends Parser {
 	public static class WhileStmtContext extends ParserRuleContext {
 		public TerminalNode WHILE() { return getToken(GramaticaParser.WHILE, 0); }
 		public TerminalNode ABRE_PARENTESE() { return getToken(GramaticaParser.ABRE_PARENTESE, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+		public BoolExprContext boolExpr() {
+			return getRuleContext(BoolExprContext.class,0);
 		}
 		public TerminalNode FECHA_PARENTESE() { return getToken(GramaticaParser.FECHA_PARENTESE, 0); }
 		public TerminalNode ABRE_CHAVE() { return getToken(GramaticaParser.ABRE_CHAVE, 0); }
@@ -1248,7 +1248,7 @@ public class GramaticaParser extends Parser {
 			setState(198);
 			match(ABRE_PARENTESE);
 			setState(199);
-			expr(0);
+			boolExpr();
 			setState(200);
 			match(FECHA_PARENTESE);
 			setState(201);
@@ -2125,7 +2125,7 @@ public class GramaticaParser extends Parser {
 		"\u00ac\u0003\u0016\u000b\u0000\u00ab\u00aa\u0001\u0000\u0000\u0000\u00ab"+
 		"\u00ac\u0001\u0000\u0000\u0000\u00ac\u0013\u0001\u0000\u0000\u0000\u00ad"+
 		"\u00ae\u0005+\u0000\u0000\u00ae\u00af\u0005*\u0000\u0000\u00af\u00b0\u0005"+
-		"\u0007\u0000\u0000\u00b0\u00b1\u0003$\u0012\u0000\u00b1\u00b2\u0005\b"+
+		"\u0007\u0000\u0000\u00b0\u00b1\u0003\u0010\b\u0000\u00b1\u00b2\u0005\b"+
 		"\u0000\u0000\u00b2\u00b6\u0005\u000b\u0000\u0000\u00b3\u00b5\u0003\u0002"+
 		"\u0001\u0000\u00b4\u00b3\u0001\u0000\u0000\u0000\u00b5\u00b8\u0001\u0000"+
 		"\u0000\u0000\u00b6\u00b4\u0001\u0000\u0000\u0000\u00b6\u00b7\u0001\u0000"+
@@ -2137,7 +2137,7 @@ public class GramaticaParser extends Parser {
 		"\u00c0\u00c1\u0001\u0000\u0000\u0000\u00c1\u00c3\u0001\u0000\u0000\u0000"+
 		"\u00c2\u00c0\u0001\u0000\u0000\u0000\u00c3\u00c4\u0005\f\u0000\u0000\u00c4"+
 		"\u0017\u0001\u0000\u0000\u0000\u00c5\u00c6\u0005.\u0000\u0000\u00c6\u00c7"+
-		"\u0005\u0007\u0000\u0000\u00c7\u00c8\u0003$\u0012\u0000\u00c8\u00c9\u0005"+
+		"\u0005\u0007\u0000\u0000\u00c7\u00c8\u0003\u0010\b\u0000\u00c8\u00c9\u0005"+
 		"\b\u0000\u0000\u00c9\u00cd\u0005\u000b\u0000\u0000\u00ca\u00cc\u0003\u0002"+
 		"\u0001\u0000\u00cb\u00ca\u0001\u0000\u0000\u0000\u00cc\u00cf\u0001\u0000"+
 		"\u0000\u0000\u00cd\u00cb\u0001\u0000\u0000\u0000\u00cd\u00ce\u0001\u0000"+

@@ -10,7 +10,7 @@ fn main() -> void{
 		display("x é positivo");
 	}
 
-	if (x > 0) {
+	if (x > "coiso") {
 		display("x é positivo");
 	} else {
 		display("x não é positivo");
@@ -18,7 +18,7 @@ fn main() -> void{
 
 	if (x > 0) {
 		display("x é positivo");
-	} else if (x == 0) {
+	} else if (x == 13.34) {
 		display("x é zero");
 	} else {
 		display("x é negativo");
