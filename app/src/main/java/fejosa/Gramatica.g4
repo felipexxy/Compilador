@@ -24,11 +24,14 @@ PONTO_E_VIRGULA: ';';
 DOIS_PONTOS: ':';
 PORCENTO: '%';
 MAIOR: '>';
+MAIOR_IGUAL: '>=';
 MENOR: '<';
+MENOR_IGUAL: '<=';
 IGUAL: '==';
+DIFERENTE: '!=';
 ATRIBUICAO: '=';
 EXCLAMACAO: '!';
-NUMERO: [0-9]+ ('.' [0-9]+)?;
+NUMERO: [\-]?[0-9]+ ('.' [0-9]+)?;
 COMENTARIO: '//' ~[\r\n]* -> skip;
 COMENTARIO_BLOCO: '/*' .*? '*/' -> skip;
 STRING: '"' (ESC | ~["\\])* '"';
@@ -53,6 +56,7 @@ TIPO:
 	| 'u64'
 	| 'f32'
 	| 'f64'
+    | 'bool'
 	| 'string';
 WHILE: 'while';
 DISPLAY: 'display';
@@ -64,7 +68,7 @@ WS: [ \t\r\n]+ -> skip; // Ignorar espaços em branco
 ESC: '\\' .;
 
 // Regras Sintáticas
-prog: mainFunc stmt* EOF;
+prog: stmt* mainFunc stmt* EOF;
 
 stmt:
 	varDecl
@@ -83,29 +87,37 @@ mainFunc:
 
 varDecl:
 	TIPO IDENTIFICADOR ('=' expr)? PONTO_E_VIRGULA
-	| TIPO IDENTIFICADOR ABRE_COLCHETE NUMERO FECHA_COLCHETE PONTO_E_VIRGULA;
+	| TIPO IDENTIFICADOR ABRE_COLCHETE NUMERO FECHA_COLCHETE ('=' expr)? PONTO_E_VIRGULA;
 
 funcDecl:
 	FUNCAO IDENTIFICADOR ABRE_PARENTESE (
 		paramDecl (VIRGULA paramDecl)*
 	)? FECHA_PARENTESE SETA (TIPO | VOID) ABRE_CHAVE stmt* FECHA_CHAVE;
 
+funcCall:
+    IDENTIFICADOR ABRE_PARENTESE ( IDENTIFICADOR (VIRGULA IDENTIFICADOR)* )? FECHA_PARENTESE;
+
 paramDecl: TIPO IDENTIFICADOR;
 
 exprStmt: expr PONTO_E_VIRGULA;
 
+boolExpr:
+    expr (MAIOR | MENOR | IGUAL | MAIOR_IGUAL | MENOR_IGUAL | DIFERENTE) expr
+    | BOOLEANO
+    | funcCall;
+
 ifStmt:
-	IF ABRE_PARENTESE expr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE (
+	IF ABRE_PARENTESE boolExpr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE (
 		elseIfStmt
 	)* (elseStmt)?;
 
 elseIfStmt:
-	ELSE IF ABRE_PARENTESE expr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE;
+	ELSE IF ABRE_PARENTESE boolExpr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE;
 
 elseStmt: ELSE ABRE_CHAVE stmt* FECHA_CHAVE;
 
 whileStmt:
-	WHILE ABRE_PARENTESE expr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE;
+	WHILE ABRE_PARENTESE boolExpr FECHA_PARENTESE ABRE_CHAVE stmt* FECHA_CHAVE;
 
 forStmt:
 	FOR IDENTIFICADOR IN NUMERO PONTO_PONTO NUMERO ABRE_CHAVE stmt* FECHA_CHAVE;
@@ -123,10 +135,11 @@ scanStmt:
 	INPUT ABRE_PARENTESE expr (VIRGULA expr)* FECHA_PARENTESE PONTO_E_VIRGULA;
 
 expr:
-	expr (MAIS | MENOS) expr
-	| expr (ASTERISCO | BARRA | PORCENTO) expr
-	| expr IGUAL expr
-	| expr (MAIOR | MENOR | MAIOR IGUAL | MENOR IGUAL) expr
+	lhs=expr op=(MAIS | MENOS) rhs=expr
+	| lhs=expr op=(ASTERISCO | BARRA | PORCENTO) rhs=expr
+	| lhs=expr op=IGUAL rhs=expr
+	| lhs=expr op=(MAIOR | MENOR | MAIOR_IGUAL | MENOR_IGUAL) rhs=expr
+    | funcCall
 	| ABRE_PARENTESE expr FECHA_PARENTESE
 	| NUMERO
 	| STRING

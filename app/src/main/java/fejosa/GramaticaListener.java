@@ -1,4 +1,5 @@
-// Generated from c:/DIO/Compilador/Compilador/app/src/main/antlr/Gramatica.g4 by ANTLR 4.13.1
+// Generated from app/src/main/java/fejosa/Gramatica.g4 by ANTLR 4.13.2
+package fejosa;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -57,6 +58,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitFuncDecl(GramaticaParser.FuncDeclContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#funcCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncCall(GramaticaParser.FuncCallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#funcCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncCall(GramaticaParser.FuncCallContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#paramDecl}.
 	 * @param ctx the parse tree
 	 */
@@ -76,6 +87,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExprStmt(GramaticaParser.ExprStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#boolExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolExpr(GramaticaParser.BoolExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#boolExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolExpr(GramaticaParser.BoolExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#ifStmt}.
 	 * @param ctx the parse tree

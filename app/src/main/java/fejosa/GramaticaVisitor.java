@@ -1,5 +1,5 @@
+// Generated from app/src/main/java/fejosa/Gramatica.g4 by ANTLR 4.13.2
 package fejosa;
-// Generated from Gramatica.g4 by ANTLR 4.13.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -41,6 +41,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFuncDecl(GramaticaParser.FuncDeclContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#funcCall}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncCall(GramaticaParser.FuncCallContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#paramDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -52,6 +58,12 @@ public interface GramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExprStmt(GramaticaParser.ExprStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GramaticaParser#boolExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolExpr(GramaticaParser.BoolExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GramaticaParser#ifStmt}.
 	 * @param ctx the parse tree

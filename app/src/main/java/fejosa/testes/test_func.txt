@@ -1,21 +1,22 @@
-fn main() -> void{
-	fn exibirMensagem() -> void {
-    	display("Olá, Mundo!");
-	}
+fn main() -> void {
+}
 
-	fn obterNumero() -> i32 {
-    	return 42;
-	}
+fn exibirMensagem() -> void {
+    display("Olá, Mundo!");
+}
 
-	fn calcularSoma(f64 a, f64 b) -> f64 {
-		return a + b;
-	}
+fn obterNumero() -> i32 {
+    return 42;
+}
 
-	fn definirTexto(string novoTexto) -> void {
-		texto = novoTexto;
-	}
+fn calcularSoma(f64 a, f64 b) -> f64 {
+    return a + b;
+}
 
-	fn concatenarStrings(string a, string b) -> string {
-		return a + b;
-	}
+fn definirTexto(string novoTexto) -> void {
+    texto = novoTexto;
+}
+
+fn concatenarStrings(string a, string b) -> string {
+    return a + b;
 }

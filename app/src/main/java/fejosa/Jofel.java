@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Jofel {
     public static void main(String[] args) {
 
-        String caminhoArquivo = "app/src/main/java/fejosa/testes/test_declVar.txt";
+        String caminhoArquivo = "/home/sampie/faculdade/Compilador/app/src/main/java/fejosa/testes/test_func.txt";
         StringBuilder conteudoArquivo = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
@@ -75,5 +75,6 @@ public class Jofel {
         SemanticAnalyzer analyzer = new SemanticAnalyzer();
         analyzer.visit(tree);
         analyzer.exibirTabelaSimbolos();
+        analyzer.exibirFuncoes();
     }
 }
