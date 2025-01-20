@@ -75,5 +75,6 @@ public class Jofel {
         SemanticAnalyzer analyzer = new SemanticAnalyzer();
         analyzer.visit(tree);
         analyzer.exibirTabelaSimbolos();
+        analyzer.exibirFuncoes();
     }
 }

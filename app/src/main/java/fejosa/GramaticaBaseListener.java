@@ -1,4 +1,4 @@
-// Generated from app/src/main/antlr/Gramatica.g4 by ANTLR 4.13.2
+// Generated from app/src/main/java/fejosa/Gramatica.g4 by ANTLR 4.13.2
 package fejosa;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -77,6 +77,18 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFuncCall(GramaticaParser.FuncCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncCall(GramaticaParser.FuncCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParamDecl(GramaticaParser.ParamDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -96,6 +108,18 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExprStmt(GramaticaParser.ExprStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoolExpr(GramaticaParser.BoolExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoolExpr(GramaticaParser.BoolExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

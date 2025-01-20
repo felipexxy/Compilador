@@ -1,4 +1,4 @@
-// Generated from app/src/main/antlr/Gramatica.g4 by ANTLR 4.13.2
+// Generated from app/src/main/java/fejosa/Gramatica.g4 by ANTLR 4.13.2
 package fejosa;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -53,6 +53,13 @@ public class GramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitFuncCall(GramaticaParser.FuncCallContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitParamDecl(GramaticaParser.ParamDeclContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -61,6 +68,13 @@ public class GramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitExprStmt(GramaticaParser.ExprStmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBoolExpr(GramaticaParser.BoolExprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

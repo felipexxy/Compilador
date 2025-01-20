@@ -1,7 +1,12 @@
+fn coiso(u32 b) -> bool {
+    return true;
+}
+
 fn main() -> void{
+    bool coiso2 = false;
     u32 x = 10;
     u32 y = 11;
-	if (x > 0) {
+	if (x > (1 - 2)) {
 		display("x é positivo");
 	}
 
@@ -34,3 +39,4 @@ fn main() -> void{
 	}
 
 }
+

@@ -8,12 +8,14 @@ import java.util.Map;
 import fejosa.GramaticaParser.ExprContext;
 
 public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
-
     private Map<String, String> tabelaSimbolos = new HashMap<>();
+    private Map<String, List<GramaticaParser.ParamDeclContext>> funcaoParametros = new HashMap<>();
 
     // verificar se variaveis já foram declaradas e o tipo de atribuição
     @Override
-    public Boolean visitVarDecl(GramaticaParser.VarDeclContext ctx) { String tipo = ctx.TIPO().getText();
+    public Boolean visitVarDecl(GramaticaParser.VarDeclContext ctx) {
+        if (ctx.TIPO() == null) return false;
+        String tipo = ctx.TIPO().getText();
         String nome = ctx.IDENTIFICADOR().getText();
         String tipoEsperado = verificarTipo(ctx.expr());
         boolean erro = true;
@@ -117,8 +119,14 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
     public Boolean visitStmt(GramaticaParser.StmtContext ctx) {
         System.out.println("STATEMENT");
         System.out.println(ctx.getText());
-        if (ctx.ifStmt() != null) {
+        if (ctx.funcDecl() != null) {
+            visitFuncDecl(ctx.funcDecl());
+        } else if (ctx.ifStmt() != null) {
             visitIfStmt(ctx.ifStmt());
+        } else if (ctx.varDecl() != null) {
+            visitVarDecl(ctx.varDecl());
+        } else if (ctx.assignStmt() != null) {
+            visitAssignStmt(ctx.assignStmt());
         }
 
         return true;
@@ -135,10 +143,6 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
     @Override
     public Boolean visitExpr(GramaticaParser.ExprContext ctx) {
         System.out.println("EXPRESSION");
-        int tipo = ctx.op.getType();
-        if (tipo == GramaticaLexer.MAIOR || tipo == GramaticaLexer.MENOR || tipo == GramaticaLexer.MAIOR_IGUAL || tipo == GramaticaLexer.MENOR_IGUAL || tipo == GramaticaLexer.IGUAL || tipo == GramaticaLexer.DIFERENTE) {
-
-        }
 
         return true;
     }
@@ -147,11 +151,123 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
     public Boolean visitIfStmt(GramaticaParser.IfStmtContext ctx) {
         System.out.println("IF STATEMENT:");
         System.out.println(ctx.getText());
-        boolean erro = visitExpr(ctx.expr());
+        visitBoolExpr(ctx.boolExpr());
 
         return true;
     }
-    
+
+    @Override
+    public Boolean visitBoolExpr(GramaticaParser.BoolExprContext ctx) {
+        System.out.println("Expressao booleana");
+        boolean sucesso = true;
+        if (ctx.expr(0).IDENTIFICADOR() != null) {
+            String id1 = ctx.expr(0).IDENTIFICADOR().getText();
+            String tipoId1 = tabelaSimbolos.get(id1);
+            if (ctx.expr(1).IDENTIFICADOR() != null) {
+                String id2 = ctx.expr(1).IDENTIFICADOR().getText();
+                String tipoId2 = tabelaSimbolos.get(id2);
+                switch (tipoId1) {
+                    case "f32":
+                    case "f64": {
+                        switch (tipoId2) {
+                            case "f32":
+                            case "f64": {
+                                sucesso = true;
+                            } break;
+                            default: sucesso = false; break;
+                        }
+                    } break;
+                    case "i8":
+                    case "i16":
+                    case "i32":
+                    case "i64": {
+                        switch (tipoId2) {
+                            case "i8":
+                            case "i16":
+                            case "i32":
+                            case "i64": {
+                                sucesso = true;
+                            } break;
+                            default: sucesso = false; break;
+                        }
+                    } break;
+                    case "u8":
+                    case "u16":
+                    case "u32":
+                    case "u64": {
+                        switch (tipoId2) {
+                            case "u8":
+                            case "u16":
+                            case "u32":
+                            case "u64": {
+                                sucesso = true;
+                            } break;
+                            default: sucesso = false; break;
+                        }
+                    } break;
+                    default: sucesso = tipoId1.equals(tipoId2); break;
+                }
+            } else {
+                String tipo = verificarTipo(ctx.expr(1));
+                switch (tipo) {
+                    case "real": {
+                        sucesso = tipoId1.equals("f32") || tipoId1.equals("f64");
+                    } break;
+                    case "intneg": {
+                        sucesso = tipoId1.equals("f32") || tipoId1.equals("f64") || tipoId1.equals("i8") || tipoId1.equals("i16") || tipoId1.equals("i32") || tipoId1.equals("i64");
+                    } break;
+                    case "int": {
+                        sucesso = tipoId1.equals("f32") || tipoId1.equals("f64") || tipoId1.equals("i8") || tipoId1.equals("i16") || tipoId1.equals("i32") || tipoId1.equals("i64") || tipoId1.equals("u8") || tipoId1.equals("u16") || tipoId1.equals("u32") || tipoId1.equals("u64");
+                    } break;
+                    case "desconhecido": sucesso = false; break;
+                    default: {
+                        tipo.equals(tipoId1);
+                    } break;
+                }
+            }
+        } else {
+            String tipo = verificarTipo(ctx.expr(0));
+            if (ctx.expr(1).IDENTIFICADOR() != null) {
+                String id2 = ctx.expr(1).IDENTIFICADOR().getText();
+                String tipoId2 = tabelaSimbolos.get(id2);
+                switch (tipo) {
+                    case "real": {
+                        sucesso = tipoId2.equals("f32") || tipoId2.equals("f64");
+                    } break;
+                    case "intneg": {
+                        sucesso = tipoId2.equals("f32") || tipoId2.equals("f64") || tipoId2.equals("i8") || tipoId2.equals("i16") || tipoId2.equals("i32") || tipoId2.equals("i64");
+                    } break;
+                    case "int": {
+                        sucesso = tipoId2.equals("f32") || tipoId2.equals("f64") || tipoId2.equals("i8") || tipoId2.equals("i16") || tipoId2.equals("i32") || tipoId2.equals("i64") || tipoId2.equals("u8") || tipoId2.equals("u16") || tipoId2.equals("u32") || tipoId2.equals("u64");
+                    } break;
+                    case "desconhecido": sucesso = false; break;
+                    default: sucesso = tipoId2.equals(tipoId2); break;
+                }
+            } else {
+                String tipo2 = verificarTipo(ctx.expr(1));
+                sucesso = tipo.equals(tipo2);
+            }
+        }
+
+        return sucesso;
+    }
+
+    @Override
+    public Boolean visitFuncDecl(GramaticaParser.FuncDeclContext ctx) {
+        boolean sucesso = true;
+        if (tabelaSimbolos.containsKey(ctx.IDENTIFICADOR().getText())) sucesso = false;
+        else {
+            tabelaSimbolos.put(ctx.IDENTIFICADOR().getText(), ctx.TIPO().getText());
+            funcaoParametros.put(ctx.IDENTIFICADOR().getText(), ctx.paramDecl());
+        }
+
+        return sucesso;
+    }
+
+    public boolean expressaoBooleana(GramaticaParser.ExprContext expr) {
+        int tipo = expr.op.getType();
+        return tipo == GramaticaLexer.MAIOR || tipo == GramaticaLexer.MENOR || tipo == GramaticaLexer.MAIOR_IGUAL || tipo == GramaticaLexer.MENOR_IGUAL || tipo == GramaticaLexer.IGUAL || tipo == GramaticaLexer.DIFERENTE;
+    }
 
     // Método para exibir a tabela de símbolos
     public void exibirTabelaSimbolos() {
@@ -164,6 +280,23 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
             // Itera pela tabela de símbolos e exibe as variáveis e seus tipos
             for (Map.Entry<String, String> entrada : tabelaSimbolos.entrySet()) {
                 System.out.println("Nome: " + entrada.getKey() + " | Tipo: " + entrada.getValue());
+            }
+        }
+
+        System.out.println("====================");
+    }
+
+    public void exibirFuncoes() {
+        System.out.println("Tabela de Funções:");
+        System.out.println("====================");
+
+        if (funcaoParametros.isEmpty()) {
+            System.out.println("Nenhuma função declarada.");
+        } else {
+            // Itera pela tabela de símbolos e exibe as variáveis e seus tipos
+            for (Map.Entry<String, List<GramaticaParser.ParamDeclContext>> entrada : funcaoParametros.entrySet()) {
+                System.out.println("Nome: " + entrada.getKey() + " | Parâmetros: ");
+                entrada.getValue().forEach(par -> System.out.println(par.getText()));
             }
         }
 
@@ -188,6 +321,8 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
             return "u8";
         } else if (ctx.IDENTIFICADOR() != null) {
             return tabelaSimbolos.get(ctx.IDENTIFICADOR().getText());
+        } else if (ctx.BOOLEANO() != null) {
+            return "bool";
         } else {
             List<String> aux = new ArrayList<>();
             for (int i = 0; i < ctx.expr().size(); i++) {
