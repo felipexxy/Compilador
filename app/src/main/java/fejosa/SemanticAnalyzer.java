@@ -117,7 +117,6 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
 
     @Override
     public Boolean visitStmt(GramaticaParser.StmtContext ctx) {
-        System.out.println("STATEMENT");
         System.out.println(ctx.getText());
         if (ctx.funcDecl() != null) {
             visitFuncDecl(ctx.funcDecl());
@@ -130,21 +129,6 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
         } else if (ctx.whileStmt() != null) {
             visitWhileStmt(ctx.whileStmt());
         }
-
-        return true;
-    }
-
-    @Override
-    public Boolean visitExprStmt(GramaticaParser.ExprStmtContext ctx) {
-        System.out.println("EXPRESSION STATEMENT");
-        System.out.println(ctx.getText());
-
-        return true;
-    }
-
-    @Override
-    public Boolean visitExpr(GramaticaParser.ExprContext ctx) {
-        System.out.println("EXPRESSION");
 
         return true;
     }
@@ -283,7 +267,8 @@ public class SemanticAnalyzer extends GramaticaBaseVisitor<Boolean> {
         boolean sucesso = true;
         if (tabelaSimbolos.containsKey(ctx.IDENTIFICADOR().getText())) sucesso = false;
         else {
-            tabelaSimbolos.put(ctx.IDENTIFICADOR().getText(), ctx.TIPO().getText());
+            if (ctx.TIPO() != null) tabelaSimbolos.put(ctx.IDENTIFICADOR().getText(), ctx.TIPO().getText());
+            else tabelaSimbolos.put(ctx.IDENTIFICADOR().getText(), "void");
             funcaoParametros.put(ctx.IDENTIFICADOR().getText(), ctx.paramDecl());
         }
 
